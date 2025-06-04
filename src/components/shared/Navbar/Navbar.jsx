@@ -6,13 +6,21 @@ import useAuth from "../../../hooks/useAuth"
 import NavLoginBtn from './NavLoginBtn';
 const Navbar = () => {
 
-    const { user } = useAuth()
+    const { user, logOut } = useAuth()
 
     const navLinks = <>
         <li><Link to="create-event">Create Events</Link></li>
         <li><Link to="manage-events">Manage Events</Link></li>
         <li><Link to="joined-events">Joined Events</Link></li>
-    </>
+    </>;
+
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {})
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
 
     return (
@@ -25,7 +33,7 @@ const Navbar = () => {
             </div>
             {
                 user ?
-                    <NavbarEnd userName={user?.displayName} navLinks={navLinks} />
+                    <NavbarEnd handleLogOut={handleLogOut} user={user} navLinks={navLinks} />
                     :
                     <NavLoginBtn />
             }
