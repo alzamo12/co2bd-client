@@ -43,7 +43,7 @@ const Login = () => {
             <title>CO2BD || Login Page</title>
             <ToastContainer />
             <div className="hero min-h-screen auth-login">
-                <div className="hero-content 2xl:px-20 md:shadow-2xl border-orange-400 md:border-2 rounded-3xl md:mx-0
+                <div className="hero-content 2xl:px-20 md:shadow-2xl border-green-300 md:border-2 rounded-3xl md:mx-0
                 h-5/6 lg:max-w-[55%] w-screen md:w-3/4 lg:w-[55%] 2xl:w-[75%] gap-[10%] flex-col md:flex-row">
 
                     <div className="card w-full lg:w-2/3">
@@ -58,10 +58,10 @@ const Login = () => {
                                     <input ref={emailRef} name='email' type="email" className="input font-bold w-full focus:bg-transparent input-ghost border-black text-black" placeholder="Email" required />
                                     <label className="label w-full">Password</label>
                                     <input name='password' type="password" className="input font-bold focus:bg-transparent w-full input-ghost border-black text-black" placeholder="Password" required />
-                                    <input type='submit' value='Login' className="btn w-1/3  mt-4 bg-orange-500 text-white border-none hover:bg-orange-600" />
+                                    <input type='submit' value='Login' className="btn w-1/3  mt-4 bg-green-500 text-white border-none hover:bg-green-600" />
                                 </form>
                                 {/* go to register page */}
-                                <Link to="/register" className=''><a className="link link-hover text-orange-500">Go to Register Page</a></Link>
+                                <Link to="/register" className=''><a className="link link-hover text-green-500">Go to Register Page</a></Link>
                             </div>
                             <SocialLogin
                             ></SocialLogin>

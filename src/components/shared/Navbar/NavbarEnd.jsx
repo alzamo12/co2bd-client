@@ -2,7 +2,7 @@
 const NavbarEnd = ({navLinks, user, handleLogOut}) => {
     return (
         <div className="navbar-end  w-auto gap-2 md:gap-4">
-            <button onClick={handleLogOut} className="btn bg-orange-500 text-white">Logout</button>
+            <button onClick={handleLogOut} className="btn bg-green-500 text-white">Logout</button>
             <div className="dropdown group dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">

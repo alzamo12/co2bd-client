@@ -66,7 +66,7 @@ const Register = () => {
             <Navbar />
             <title>CO2BD | Sign Up</title>
             <div className="hero min-h-screen auth-login">
-                <div className="hero-content 2xl:px-20 md:shadow-2xl border-orange-400 md:border-2 rounded-3xl md:mx-0
+                <div className="hero-content 2xl:px-20 md:shadow-2xl border-green-300 md:border-2 rounded-3xl md:mx-0
                  h-5/6 py-0 lg:max-w-[55%] w-screen md:w-3/4 lg:w-[55%] 2xl:w-[75%] gap-[10%] flex-col md:flex-row">
                     <div className="card w-full lg:w-2/3">
                         <div>
@@ -98,10 +98,10 @@ const Register = () => {
                                         type="password"
                                         className=" input input-ghost focus:bg-transparent font-bold  w-full  border-black "
                                         placeholder="Password" />
-                                    <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 bg-orange-500 border-none hover:bg-orange-600" />
+                                    <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 bg-green-500 border-none hover:bg-green-600" />
                                 </form>
                                 {/* go to login page */}
-                                <Link to="/login" className=''><a className="link link-hover text-orange-500">Go to Login Page</a></Link>
+                                <Link to="/login" className=''><a className="link link-hover text-green-500">Go to Login Page</a></Link>
                             </div>
                             <SocialLogin></SocialLogin>
                         </div>
