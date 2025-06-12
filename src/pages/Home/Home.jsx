@@ -1,5 +1,7 @@
+import Marquee from 'react-fast-marquee';
 import Banner from './Banner';
 import Featured from "./Featured"
+import Gallery from './Gallery';
 const Home = () => {
     return (
         <div>
@@ -8,6 +10,9 @@ const Home = () => {
             </div>
             <div>
                 <Featured />
+            </div>
+            <div className=''>
+                <Gallery />
             </div>
         </div>
     );
