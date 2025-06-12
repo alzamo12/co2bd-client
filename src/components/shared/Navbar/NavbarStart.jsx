@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import logo from "../../../assets/newlogo.png"
 import health from "../../../assets/healthy.png"
 const NavbarStart = () => {
     return (

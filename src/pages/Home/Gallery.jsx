@@ -21,8 +21,12 @@ import Marquee from 'react-fast-marquee';
 const Gallery = () => {
     return (
         <div className='relative mt-12 lg:mt-20'>
-            <h2 className="text-2xl lg:text-5xl font-bold text-center md:mb-4">Our Successful Works Till Now!! </h2>
-            <Marquee className='bg-green-600 text-white font-bold absolute z-10 top-10' play={true}><p>These are our best work and Their Photos. Hope You Like thar</p></Marquee>
+            <h2 className="text-2xl lg:text-4xl font-bold text-center md:mb-4">Our Successful Works Till Now!! </h2>
+            <Marquee
+            gradientWidth={3000} 
+            autoFill={true}
+            className='bg-green-600 text-white font-bold absolute z-10 top-10' 
+            play={true}><p>*** These are our best work and Their Photos. Hope You Like that. ***</p> &nbsp; &nbsp; &nbsp; &nbsp;</Marquee>
             <Swiper
                 spaceBetween={30}
                 effect={'fade'}
