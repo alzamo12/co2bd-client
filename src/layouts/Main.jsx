@@ -4,9 +4,11 @@ import Navbar from '../components/shared/Navbar/Navbar';
 
 const Main = () => {
     return (
-        <div className='md:max-w-11/12 mx-auto'>
+        <div className=''>
             <Navbar />
-            <Outlet />
+            <div className="md:w-11/12 mx-auto">
+                <Outlet />
+            </div>
         </div>
     );
 };

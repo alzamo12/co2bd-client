@@ -16,15 +16,15 @@ const Navbar = () => {
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(error => {
-            console.log(error)
-        })
+            .then(() => { })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
 
     return (
-        <div className="navbar shadow-sm justify-between">
+        <div className="navbar md:w-11/12 mx-auto shadow-sm justify-between">
             <NavbarStart />
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
