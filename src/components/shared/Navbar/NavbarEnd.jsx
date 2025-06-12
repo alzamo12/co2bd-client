@@ -1,9 +1,9 @@
 
 const NavbarEnd = ({navLinks, user, handleLogOut}) => {
     return (
-        <div className="navbar-end w-auto gap-2 md:gap-4">
+        <div className="navbar-end  w-auto gap-2 md:gap-4">
             <button onClick={handleLogOut} className="btn bg-orange-500 text-white">Logout</button>
-            <div className="dropdown dropdown-end">
+            <div className="dropdown group dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
                         <img
@@ -11,10 +11,11 @@ const NavbarEnd = ({navLinks, user, handleLogOut}) => {
                             src={user.photoURL} />
                     </div>
                 </div>
+                <h2 className="font-bold text-xl group-hover:block hidden absolute top-10 bg-black opacity-50  px-2 py-1 text-white rounded-lg">{user.displayName}</h2>
                 <ul
                     tabIndex={0}
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                    <li className="text-lg font-bold">{user.displayName || "ponku Kumar"}</li>
+                    <li className="text-lg font-bold">{user.displayName || "ponkuz Kumar"}</li>
                     {navLinks}
                 </ul>
             </div>
