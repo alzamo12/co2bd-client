@@ -14,7 +14,7 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile, user } = useAuth();
     const { navigate, from } = usePrivateRouteNavigation();
 
     const onSubmit = (data) => {
@@ -57,6 +57,8 @@ const Register = () => {
                 break;
         }
     }, [errors.password?.type]);
+
+    if (user) navigate("/")
 
     return (
         <div>

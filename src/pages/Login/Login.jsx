@@ -8,13 +8,10 @@ import { Link } from "react-router";
 import Navbar from "../../components/shared/Navbar/Navbar"
 
 const Login = () => {
-    const { signIn } = useAuth();
+    const { signIn, user } = useAuth();
     const emailRef = useRef("email@gmail.com");
     // const errorMsg = useCustomErrorToast();
     const { from, navigate } = usePrivateRouteNavigation();
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // let from = location.state?.from?.pathname || '/';
 
     const handleLogin = e => {
         e.preventDefault()
@@ -37,6 +34,9 @@ const Login = () => {
                 console.log(error)
             })
     };
+
+    if (user) navigate("/")
+
     return (
         <div>
             <Navbar />
