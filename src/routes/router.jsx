@@ -3,6 +3,8 @@ import Main from "../layouts/Main";
 import Home from "../pages/Home/Home"
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import CreateEvent from "../pages/CreateEvent/CreateEvent";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "create-event",
-        element: <span>Thsi is cretae event Page</span>
+        element: <PrivateRoute><CreateEvent /></PrivateRoute>
       },
       {
         path: "manage-events",
