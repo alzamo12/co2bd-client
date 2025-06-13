@@ -3,11 +3,13 @@ import CreateEventForm from "./CreateEventForm";
 import useAuth from "../../hooks/useAuth"
 import useAxiosSecure from "../../hooks/useAxiosSecure"
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const CreateEvent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         const eventData = {
@@ -27,7 +29,7 @@ const CreateEvent = () => {
                     icon: "success",
                     draggable: true
                 });
-                console.log(data)
+                navigate("/upcoming-events")
             }
         }
         catch (error) {
