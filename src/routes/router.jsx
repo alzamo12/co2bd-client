@@ -18,6 +18,10 @@ const router = createBrowserRouter([
       },
       {
         path: "upcoming-events",
+        element: <UpcomingEvents />
+      },
+      {
+        path: "event/:id",
         element: <PrivateRoute><UpcomingEvents /></PrivateRoute>
       },
       {

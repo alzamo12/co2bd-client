@@ -28,7 +28,7 @@ const Navbar = () => {
             <NavbarStart />
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li className="card-title">Upcoming Events</li>
+                    <Link to="/upcoming-events"> <li className="card-title">Upcoming Events</li></Link>
                 </ul>
             </div>
             {
