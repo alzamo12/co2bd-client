@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import Navbar from '../components/shared/Navbar/Navbar';
 import useAuth from '../hooks/useAuth';
 import LoadingSpinner from "../components/shared/LoadingSpinner/LoadingSpinner"
+import { ToastContainer } from 'react-toastify';
 
 const Main = () => {
     const { loading } = useAuth();
@@ -11,6 +12,7 @@ const Main = () => {
 
     return (
         <div className=''>
+            <ToastContainer />
             <Navbar />
             <div className="md:w-11/12 mx-auto">
                 <Outlet />

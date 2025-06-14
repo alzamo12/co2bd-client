@@ -1,24 +1,42 @@
 import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const Event = () => {
     const params = useParams();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
 
-    const { data: event } = useQuery({
+    const { data: event, isPending } = useQuery({
         queryKey: ["event"],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/event/${params.id}`);
             return data
         }
+    });
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async (event) => {
+            const { data } = await axiosSecure.post("/join-event", event);
+            return data
+        },
+        onSuccess: (data) => {
+            console.log(data)
+            if (data.acknowledged) {
+                toast.success("You have Successfully Joined the Event")
+            }
+        },
+        onError: (error) => {
+            console.error(error)
+            toast.error("Error occurred")
+        }
     })
 
-    const { image, title, description } = event;
 
-    const handleJoinEvent = event => {
+    const handleJoinEvent = async event => {
         const { _id, ...rest } = event;
         const eventData = {
             eventId: _id,
@@ -26,8 +44,14 @@ const Event = () => {
             user_email: user.email,
             user_name: user.displayName
         };
-        console.log(eventData)
+
+        mutateAsync(eventData)
+
+        // console.log(eventData)
     }
+
+    if (isPending) return <LoadingSpinner />
+    const { image, title, description } = event;
 
     return (
         <div className="card lg:card-side bg-base-100 shadow-sm mt-20">
