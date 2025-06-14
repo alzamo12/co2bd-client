@@ -35,7 +35,6 @@ const Event = () => {
         }
     })
 
-
     const handleJoinEvent = async event => {
         const { _id, ...rest } = event;
         const eventData = {
@@ -51,6 +50,7 @@ const Event = () => {
     }
 
     if (isPending) return <LoadingSpinner />
+
     const { image, title, description } = event;
 
     return (

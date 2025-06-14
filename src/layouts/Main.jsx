@@ -12,6 +12,7 @@ const Main = () => {
 
     return (
         <div className=''>
+            <title>CO_2_BD</title>
             <ToastContainer />
             <Navbar />
             <div className="md:w-11/12 mx-auto">
