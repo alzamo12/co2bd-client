@@ -1,18 +1,17 @@
-import React from 'react';
 import { Link } from 'react-router';
 
-const UpcomingEvent = ({ event }) => {
-
-    const { _id, image, title, location, type, eventDate } = event;
+const ManageEvent = ({ event }) => {
+    const { _id, image, title, type, eventDate, location } = event;
+    console.log(event)
     return (
-        <div className="card bg-base-100 shadow-sm">
-            <figure className="px-10 pt-10">
+        <div className="card bg-base-100 w-80 shadow-sm px-5">
+            <figure className=" pt-10">
                 <img
                     src={image}
                     alt="Shoes"
                     className="rounded-xl" />
             </figure>
-            <div className="card-body px-12 w-full">
+            <div className="card-body px-0 w-full">
                 <h2 className="card-title text-xl">{title}</h2>
                 <h2 className="card-title text-base">{type}</h2>
                 <p>{location}</p>
@@ -25,4 +24,4 @@ const UpcomingEvent = ({ event }) => {
     );
 };
 
-export default UpcomingEvent;
+export default ManageEvent;

@@ -8,7 +8,8 @@ const UpcomingEvents = () => {
     const { data: upcomingEvents, isPending } = useQuery({
         queryKey: ["upcomingEvent"],
         queryFn: async () => {
-            const { data } = await axiosPublic.get("/events");
+            const date = new Date().toLocaleDateString();
+            const { data } = await axiosPublic.get( `/events?queryDate=${date}`);
             // console.log(data)
             return data
         }
