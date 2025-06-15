@@ -1,8 +1,11 @@
 import { useLoaderData } from "react-router";
 import UpdateEventForm from "../../components/UpdateEvent/UpdateEventForm";
+import { useState } from "react";
 
 const UpdateEvent = () => {
     const event = useLoaderData();
+    const [selectedDate, setSelectedDate] = useState(event?.eventDate);
+
     console.log(event)
     const onSubmit = (data) => {
 
@@ -16,7 +19,7 @@ const UpdateEvent = () => {
             </div>
 
             {/* create event form */}
-            <UpdateEventForm  onSubmit={onSubmit} />
+            <UpdateEventForm selectedDate={selectedDate} setSelectedDate={setSelectedDate} event={event} onSubmit={onSubmit} />
         </div>
     );
 };

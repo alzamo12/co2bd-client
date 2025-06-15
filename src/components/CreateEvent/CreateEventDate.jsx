@@ -11,7 +11,7 @@ const CreateEventDate = ({selectedDate, setSelectedDate}) => {
                     className="w-full"
                     dateFormat="yyyy/MM/dd"
                     selected={selectedDate}
-                    // startDate={selectedDate}
+                    startDate={selectedDate}
                     minDate={new Date()}
                     onChange={(date) => setSelectedDate(date)}
                 />
