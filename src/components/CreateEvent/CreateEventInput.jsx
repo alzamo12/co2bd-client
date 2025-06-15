@@ -4,7 +4,6 @@ const CreateEventInput = ({ type, register }) => {
     if (typeLowerText.includes(" ")) {
         typeLowerText = typeLowerText.split(" ")[0];
     }
-    console.log(typeLowerText)
     return (
         <div className="">
             <label className="label w-full mb-1">{type}</label>

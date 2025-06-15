@@ -5,12 +5,12 @@ const UpcomingEvent = ({ event }) => {
 
     const { _id, image, title, location, type, eventDate } = event;
     return (
-        <div className="card bg-base-100 shadow-sm">
+        <div className="card bg-base-100 shadow-sm w-full">
             <figure className="px-10 pt-10">
                 <img
                     src={image}
                     alt="Shoes"
-                    className="rounded-xl" />
+                    className="rounded-xl h-80" />
             </figure>
             <div className="card-body px-12 w-full">
                 <h2 className="card-title text-xl">{title}</h2>
