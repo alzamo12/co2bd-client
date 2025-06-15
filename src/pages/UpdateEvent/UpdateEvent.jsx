@@ -4,10 +4,12 @@ import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const UpdateEvent = () => {
     const event = useLoaderData();
-    const { eventDate, _id } = event
+    const { user } = useAuth();
+    const { eventDate, _id } = event;
     const [selectedDate, setSelectedDate] = useState(eventDate);
     const axiosSecure = useAxiosSecure();
     console.log(event)
@@ -19,7 +21,12 @@ const UpdateEvent = () => {
         },
         onSuccess: (data) => {
             console.log(data)
-            toast.success("File updated successfully")
+            if (data.modifiedCount > 0) {
+                toast.success("File updated successfully")
+            }
+            else {
+                toast("Nothing updated")
+            }
         },
         onError: (error) => {
             console.log(error)
@@ -28,12 +35,17 @@ const UpdateEvent = () => {
     })
 
     const onSubmit = async (data) => {
-        const eventData = {
-            ...data,
-            eventDate: selectedDate
+        if (user.email === event.email) {
+            const eventData = {
+                ...data,
+                eventDate: selectedDate
+            }
+            console.log(eventData)
+            await mutateAsync(data)
         }
-        console.log(eventData)
-        await mutateAsync(data)
+        else {
+            toast.error("You can not get access of this event")
+        }
     };
 
     return (

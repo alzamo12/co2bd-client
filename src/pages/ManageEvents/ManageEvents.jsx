@@ -10,7 +10,8 @@ const ManageEvents = () => {
     const { data: events, isPending } = useQuery({
         queryKey: ["event"],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/events?email=${user.email}`);
+            const email = 'tasifa@gmail.com';
+            const { data } = await axiosSecure.get(`/events/${user?.email}`);
             // console.log(data)
             return data
         }

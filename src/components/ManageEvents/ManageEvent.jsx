@@ -2,7 +2,6 @@ import { Link } from 'react-router';
 
 const ManageEvent = ({ event }) => {
     const { _id, image, title, type, eventDate, location } = event;
-    console.log(event)
     return (
         <div className="card bg-base-100 w-80 shadow-sm px-5">
             <figure className=" pt-10">
