@@ -17,7 +17,7 @@ const ManageEvent = ({ event }) => {
                 <p>{location}</p>
                 <p>{eventDate}</p>
                 <div className="card-actions flex w-full justify-end">
-                    <Link to={`/event/${_id}`} className='btn btn-neutral'>View Event</Link>
+                    <Link to={`/update-event/${_id}`} className='btn btn-neutral'>View Event</Link>
                 </div>
             </div>
         </div>
