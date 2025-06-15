@@ -6,12 +6,13 @@ import { useState } from "react";
 const UpcomingEvents = () => {
     const axiosPublic = useAxiosPublic();
     const [search, setSearch] = useState("");
+    const [filter, setFilter] = useState("");
 
     const { data: upcomingEvents, isPending } = useQuery({
-        queryKey: ["upcomingEvent", search],
+        queryKey: ["upcomingEvent", search, filter],
         queryFn: async () => {
             const date = new Date().toLocaleDateString();
-            const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}`);
+            const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}&filter=${filter}`);
             // console.log(data)
             return data
         }
@@ -21,6 +22,19 @@ const UpcomingEvents = () => {
         const text = e.target.search.value;
         setSearch(text);
         console.log(text, search)
+    };
+
+    const handleFilter = (e) => {
+        e.preventDefault()
+        const type = e.target.type.value;
+
+        if (type === "All") {
+            return setFilter("")
+        }
+        else {
+            setFilter(type)
+        }
+        // console.log(type)
     }
 
     if (isPending) return <LoadingSpinner />
@@ -32,13 +46,26 @@ const UpcomingEvents = () => {
                 <input name="search" type="text" placeholder="Type here" className="input" />
                 <input type="submit" value="Search" className="btn btn-neutral" />
             </form>
+
+            {/* filter */}
+            <form onSubmit={handleFilter} action="">
+                <select name="type" defaultValue="Pick a Type" className="select">
+                    <option >All</option>
+                    <option>Clean Up</option>
+                    <option>Tree Plantation</option>
+                    <option>Donation</option>
+                </select>
+                <input type="submit" value="Search" className="btn btn-neutral" />
+
+            </form>
+
             {/* event */}
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
                 {
                     upcomingEvents?.map(event => <UpcomingEvent event={event} />)
                 }
             </div>
-        </div>
+        </div >
     );
 };
 
