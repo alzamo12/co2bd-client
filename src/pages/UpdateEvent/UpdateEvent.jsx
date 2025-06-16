@@ -12,7 +12,6 @@ const UpdateEvent = () => {
     const { eventDate, _id } = event;
     const [selectedDate, setSelectedDate] = useState(eventDate);
     const axiosSecure = useAxiosSecure();
-    console.log(event)
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data) => {
@@ -36,12 +35,18 @@ const UpdateEvent = () => {
 
     const onSubmit = async (data) => {
         if (user.email === event.email) {
+            const { _id, name, email, timeStamp, ...rest } = event;
+
             const eventData = {
                 ...data,
-                eventDate: selectedDate
+                eventDate: selectedDate === eventDate ? eventDate : selectedDate.toLocaleDateString()
+            };
+
+            if (JSON.stringify(rest, Object.keys(rest).sort()) == JSON.stringify(eventData, Object.keys(eventData).sort())) {
+                return toast.error("please change something and try again")
             }
-            console.log(eventData)
-            await mutateAsync(data)
+
+            await mutateAsync(eventData)
         }
         else {
             toast.error("You can not get access of this event")
@@ -52,7 +57,6 @@ const UpdateEvent = () => {
         <div className="mt-10 w-3/4 md:w-full mx-auto">
             <div className="md:mx-auto md:w-xl border-l-0 border-r-0 border-2 border-green-400  border-dashed py-4">
                 <h2 className="card-title justify-center text-2xl md:text-4xl">Update Your Event</h2>
-                {/* <div className="divider w-full before:bg-green-400 after:bg-green-400"></div> */}
             </div>
 
             {/* create event form */}

@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth"
 import useAxiosSecure from "../../hooks/useAxiosSecure"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const CreateEvent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -12,6 +13,9 @@ const CreateEvent = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
+        if(!selectedDate){
+            return toast.error("Please Select a date first")
+        }
         const eventData = {
             ...data,
             eventDate: selectedDate.toLocaleDateString(),
