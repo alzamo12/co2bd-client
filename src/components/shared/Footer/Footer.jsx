@@ -54,7 +54,7 @@ const Footer = () => {
                     </div>
                 </nav>
             </div>
-            <div className=" footer-center relative w-[100vw] left-1/2 right-1/2 -mx-[50vw] bg-base-300 text-base-content p-4">
+            <div className=" footer-center relative w-[100vw] left-1/2 right-1/2 -mx-[50vw] bg-base-300 text-base-content text-xs md:text-base p-4">
                 <p><span className='font-bold'>Terms & Conditions</span>: By creating an account, booking an Event, or otherwise using our Services, you confirm that you have read, understood, and agree to these Terms & Conditions and our Privacy Policy.</p>
             </div>
         </footer>

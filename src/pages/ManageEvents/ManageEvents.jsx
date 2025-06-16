@@ -8,11 +8,10 @@ const ManageEvents = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const { data: events, isPending } = useQuery({
-        queryKey: ["event"],
+        queryKey: ["event", user.email],
         queryFn: async () => {
             const email = 'tasifa@gmail.com';
             const { data } = await axiosSecure.get(`/events/${user?.email}`);
-            // console.log(data)
             return data
         }
     })
@@ -22,7 +21,7 @@ const ManageEvents = () => {
     return (
         <div className="max-w-screen-2xl mx-auto mt-10 space-y-8">
             <h2 className="card-title justify-center text-xl">Manage Your Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-10/12 mx-auto md:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-10/12 mx-auto md:gap-12 gap-6">
                 {
                     events?.map(event => <ManageEvent key={event._id} event={event} />)
                 }
