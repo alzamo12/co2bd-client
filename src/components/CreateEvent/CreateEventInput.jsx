@@ -10,7 +10,7 @@ const CreateEventInput = ({ type, register, rules }) => {
             <input {...register(typeLowerText, {
                 required: true,
                 ...rules
-            })} name={typeLowerText} type="text" className="input font-bold w-full focus:bg-transparent input-ghost border-black text-black" placeholder={type} />
+            })} name={typeLowerText} type="text" className="input font-bold w-full focus:bg-transparent" placeholder={type} />
 
         </div>
     );

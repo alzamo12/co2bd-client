@@ -4,6 +4,7 @@ import Navbar from '../components/shared/Navbar/Navbar';
 import useAuth from '../hooks/useAuth';
 import LoadingSpinner from "../components/shared/LoadingSpinner/LoadingSpinner"
 import { ToastContainer } from 'react-toastify';
+import Footer from '../components/shared/Footer/Footer';
 
 const Main = () => {
     const { loading } = useAuth();
@@ -14,9 +15,12 @@ const Main = () => {
         <div className=''>
             <title>CO_2_BD</title>
             <ToastContainer />
-            <Navbar />
-            <div className="md:w-11/12 mx-auto">
-                <Outlet />
+            <div className="space-y-20 ">
+                <Navbar />
+                <div className="md:w-11/12 mx-auto">
+                    <Outlet />
+                </div>
+                <Footer />
             </div>
         </div>
     );

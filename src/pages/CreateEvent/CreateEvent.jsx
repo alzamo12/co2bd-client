@@ -13,19 +13,19 @@ const CreateEvent = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        if(!selectedDate){
+        if (!selectedDate) {
             return toast.error("Please Select a date first")
         }
         const eventData = {
             ...data,
-            eventDate: selectedDate.toLocaleDateString(),
+            eventDate: selectedDate,
             name: user.displayName,
             email: user.email
         };
         console.log(eventData)
         // post event data to database
         try {
-            const {data} = await axiosSecure.post("/event", eventData);
+            const { data } = await axiosSecure.post("/event", eventData);
             console.log(data)
             if (data.insertedId) {
                 Swal.fire({

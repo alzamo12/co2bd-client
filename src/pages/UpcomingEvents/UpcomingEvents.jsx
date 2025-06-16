@@ -19,6 +19,7 @@ const UpcomingEvents = () => {
     })
 
     const handleSearch = e => {
+        e.preventDefault()
         const text = e.target.search.value;
         setSearch(text);
         console.log(text, search)
@@ -37,31 +38,33 @@ const UpcomingEvents = () => {
         // console.log(type)
     }
 
-    if (isPending) return <LoadingSpinner />
+    // if (isPending) return <LoadingSpinner />
 
     return (
         <div className="max-w-screen-2xl mx-auto lg:mt-16 md:space-y-10">
             <h2 className="card-title text-5xl justify-center">Upcoming Events Page</h2>
-            <form onSubmit={handleSearch} action="">
-                <input name="search" type="text" placeholder="Type here" className="input" />
-                <input type="submit" value="Search" className="btn btn-neutral" />
-            </form>
+            <div className="flex gap-12">
+                <form className="flex w-1/2" onSubmit={handleSearch} action="">
+                    <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
+                    <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
+                </form>
 
-            {/* filter */}
-            <form onSubmit={handleFilter} action="">
-                <select name="type" defaultValue="Pick a Type" className="select">
-                    <option >All</option>
-                    <option>Clean Up</option>
-                    <option>Tree Plantation</option>
-                    <option>Donation</option>
-                </select>
-                <input type="submit" value="Search" className="btn btn-neutral" />
+                {/* filter */}
+                <form className="flex w-1/3" onSubmit={handleFilter} action="">
+                    <select name="type" defaultValue="Pick a Type" className="select rounded-r-none focus:border-none w-1/2">
+                        <option >All</option>
+                        <option>Clean Up</option>
+                        <option>Tree Plantation</option>
+                        <option>Donation</option>
+                    </select>
+                    <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
 
-            </form>
+                </form>
+            </div>
 
             {/* event */}
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
-                {
+                {isPending ? <LoadingSpinner /> :
                     upcomingEvents?.map(event => <UpcomingEvent event={event} />)
                 }
             </div>

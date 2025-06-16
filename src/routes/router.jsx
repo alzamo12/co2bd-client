@@ -7,7 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import CreateEvent from "../pages/CreateEvent/CreateEvent";
 import UpcomingEvents from "../pages/UpcomingEvents/UpcomingEvents";
 import Event from "../pages/Event/Event";
-import JoinedEvent from "../pages/JoinedEvent/JoinedEvent";
+import JoinedEvents from "../pages/JoinedEvent/JoinedEvents";
 import ManageEvents from "../pages/ManageEvents/ManageEvents";
 import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
 
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "joined-events",
-        element: <PrivateRoute><JoinedEvent /></PrivateRoute>
+        element: <PrivateRoute><JoinedEvents /></PrivateRoute>
       },
       {
         path: "update-event/:id",
