@@ -4,6 +4,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
+import { BiCategory } from "react-icons/bi";
+import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const Event = () => {
     const params = useParams();
@@ -51,18 +53,26 @@ const Event = () => {
 
     if (isPending) return <LoadingSpinner />
 
-    const { image, title, description } = event;
+    const { image, title, description, type, location, eventDate, name } = event;
 
     return (
-        <div className="card lg:card-side bg-base-100 shadow-sm mt-20">
-            <figure className="w-full lg:w-1/2">
+        <div className="card lg:card-side bg-base-100 shadow-sm mt-20 mx-2 md:mx-0 ">
+            <figure className="w-full lg:w-full">
                 <img
                     src={image}
+                    className="w-full"
                     alt="Album" />
             </figure>
-            <div className="card-body">
-                <h2 className="card-title">{title}!</h2>
-                <p>{description}</p>
+            <div className="px-10 py-8 space-y-4 w-full">
+                    <h2 className="card-title text-xl">{title}!</h2>
+                    <h4 className="card-title">Author name: {name}</h4>
+                    <p>{description}</p>
+                    {/* <h2 className="card-title text-xl md:text-2xl flex gap-2 items-center">{title}</h2> */}
+                    <div className="mt-0">
+                        <h2 className="card-title text-lg flex gap-2 items-center"><BiCategory />{type}</h2>
+                        <p className="flex gap-2 text-base items-center"><FaMapMarkerAlt />{location}</p>
+                        <p className="flex gap-2 text-base items-center"><FaCalendarAlt />{eventDate}</p>
+                    </div>
                 <div className="card-actions justify-end">
                     <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
                 </div>
