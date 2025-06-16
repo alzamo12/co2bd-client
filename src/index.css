@@ -1,7 +1,14 @@
 @import "tailwindcss";
-@plugin "daisyui";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap');
-.edu-font{
+
+.edu-font {
   font-family: "Edu NSW ACT Cursive", cursive;
   /* font-optical-sizing: auto; */
 }

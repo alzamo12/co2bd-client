@@ -4,6 +4,7 @@ const NavbarEnd = ({ navLinks, user, handleLogOut }) => {
         <div className="navbar-end  w-auto gap-2 md:gap-4">
             {/* logout button */}
             <button onClick={handleLogOut} className="btn bg-green-500 text-white">Logout</button>
+          
             {/* pfp  */}
             <div className="dropdown group dropdown-end">
                 {/* pfp avatar */}
