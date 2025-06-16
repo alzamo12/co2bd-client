@@ -1,23 +1,27 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
-import { useRef } from "react";
+import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import usePrivateRouteNavigation from "../../hooks/usePrivateRouteNavigation";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { Link } from "react-router";
 import Navbar from "../../components/shared/Navbar/Navbar"
+import { useForm } from "react-hook-form";
 
 const Login = () => {
     const { signIn, user } = useAuth();
-    const emailRef = useRef("email@gmail.com");
     // const errorMsg = useCustomErrorToast();
     const { from, navigate } = usePrivateRouteNavigation();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    const handleLogin = e => {
-        e.preventDefault()
-        const data = e.target;
-        const email = data.email.value
-        const password = data.password.value;
+    const handleLogin = data => {
+        const email = data.email;
+        const password = data.password;
+
         signIn(email, password)
             .then(() => {
                 Swal.fire({
@@ -28,12 +32,27 @@ const Login = () => {
                 navigate(from, { replace: true })
             })
             .catch(error => {
-
                 const newError = error?.message.replace("Firebase:", "");
                 toast.error(`Oppss! Login failed: ${newError}`)
                 console.log(error)
             })
     };
+
+    useEffect(() => {
+        switch (errors.password?.type) {
+            case "minLength":
+                toast.error("Error: Password must be at least 6 characters", { autoClose: 1500 });
+                break;
+            case "pattern":
+                toast.error("Error: Password must have an uppercase and a lowercase letter", { autoClose: 1500 });
+                break;
+        }
+        switch (errors.email?.type) {
+            case "pattern":
+                toast.error("Error: Invalid Email", { autoClose: 1500 });
+                break;
+        }
+    }, [errors.password?.type, errors.email?.type]);
 
     if (user) navigate("/")
 
@@ -51,13 +70,37 @@ const Login = () => {
                         </div>
                         <div className="card-body w-full inter mb-0 mt-0 text-xl font-semibold">
                             {/* email */}
-                            <div onSubmit={handleLogin} className="card-body  mb-0 md:w-2/3 md:mx-auto lg:mx-0 lg:w-full">
+                            <div className="card-body  mb-0 md:w-2/3 md:mx-auto lg:mx-0 lg:w-full">
                                 <h2 className="text-4xl inter font-bold md:text-left lg:text-center">Login</h2>
-                                <form className="fieldset w-full items-center font-medium">
+                                <form onSubmit={handleSubmit(handleLogin)} className="fieldset w-full items-center font-medium">
+                                    {/* email */}
                                     <label className="label w-full">Email</label>
-                                    <input ref={emailRef} name='email' type="email" className="input font-bold w-full focus:bg-transparent input-ghost border-black text-black" placeholder="Email" required />
+                                    <input {...register("email",
+                                        {
+                                            required: true,
+                                            pattern: /^[^\s@]+@[^\s/@]+\.[^\s@]+$/
+                                        })}
+                                        name='email'
+                                        type="email"
+                                        className="input font-bold w-full focus:bg-transparent input-ghost
+                                                 border-black text-black"
+                                        placeholder="Email"
+                                        required />
+
+                                    {/* password */}
                                     <label className="label w-full">Password</label>
-                                    <input name='password' type="password" className="input font-bold focus:bg-transparent w-full input-ghost border-black text-black" placeholder="Password" required />
+                                    <input {...register("password",
+                                        {
+                                            required: true,
+                                            minLength: 6,
+                                            pattern: /(?=.*[A-Z])(?=.*[a-z])/
+                                        })}
+                                        name='password'
+                                        type="password"
+                                        className="input font-bold focus:bg-transparent w-full input-ghost
+                                                 border-black text-black"
+                                        placeholder="Password"
+                                        required />
                                     <input type='submit' value='Login' className="btn w-1/3  mt-4 bg-green-500 text-white border-none hover:bg-green-600" />
                                 </form>
                                 {/* go to register page */}
@@ -66,7 +109,6 @@ const Login = () => {
                             <SocialLogin
                             ></SocialLogin>
                         </div>
-
                     </div>
                 </div>
             </div>

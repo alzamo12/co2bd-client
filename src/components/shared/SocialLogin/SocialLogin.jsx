@@ -4,7 +4,6 @@ import usePrivateRouteNavigation from '../../../hooks/usePrivateRouteNavigation'
 const SocialLogin = () => {
     const { googleSignIn } = useAuth();
     const { from, navigate } = usePrivateRouteNavigation();
-    console.log(from)
     const handleSocialLogin = () => {
         googleSignIn()
             .then(() => {
