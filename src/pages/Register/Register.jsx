@@ -56,7 +56,25 @@ const Register = () => {
                 toast.error("Error: Password must have an uppercase and a lowercase letter", { autoClose: 1500 });
                 break;
         }
-    }, [errors.password?.type]);
+        switch (errors.email?.type) {
+            case "pattern":
+                toast.error("Error: Invalid Email", { autoClose: 1500 });
+                break;
+        }
+        switch (errors.photo?.type) {
+            case "pattern":
+                toast.error("invalid Photo URL")
+                break
+        }
+        switch (errors.name?.type) {
+            case "minLength":
+                toast.error("username must have 4 letters")
+                break
+            case "pattern":
+                toast.error("Username must start with a letter and have a letter in it")
+                break
+        }
+    }, [errors.password?.type, errors.email?.type, errors.photo?.type, errors.name?.type]);
 
     if (user) navigate("/")
 
@@ -79,13 +97,39 @@ const Register = () => {
                                 <form className="fieldset w-full items-center font-medium">
                                     {/* Name */}
                                     <label className="label w-full">Your Name</label>
-                                    <input {...register("name", { required: true })} type="text" className="input font-bold w-full  focus:bg-transparent input-ghost border-black text-black" placeholder="Your Name" required />
+                                    <input {...register("name", {
+                                        required: true,
+                                        minLength: 4,
+                                        pattern: /^[A-Za-z][A-Za-z ]*$/
+                                    })}
+                                        type="text"
+                                        className="input font-bold w-full  focus:bg-transparent input-ghost
+                                          border-black text-black"
+                                        placeholder="Your Name"
+                                        required />
                                     {/* email */}
                                     <label className="label w-full">Email</label>
-                                    <input {...register("email", { required: true })} type="email" className="input font-bold w-full  focus:bg-transparent input-ghost border-black text-black" placeholder="Email" required />
+                                    <input {...register("email", {
+                                        required: true,
+                                        pattern: /^[^\s@]+@[^\s/@]+\.[^\s@]+$/
+                                    })}
+                                        type="email"
+                                        className="input font-bold w-full  focus:bg-transparent 
+                                                   input-ghost border-black text-black"
+                                        placeholder="Email"
+                                        required />
                                     {/* photo url */}
                                     <label className="label w-full">Photo URL</label>
-                                    <input {...register("photo", { required: true })} type="text" className="input font-bold w-full  focus:bg-transparent input-ghost border-black text-black" placeholder="Photo URL" required />
+                                    <input {...register("photo",
+                                        {
+                                            required: true,
+                                            pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg)$/i
+                                        })}
+                                        type="text"
+                                        className="input font-bold w-full  
+                                             focus:bg-transparent input-ghost border-black text-black"
+                                        placeholder="Photo URL"
+                                        required />
                                     {/* password */}
                                     <label className="label w-full">Password</label>
                                     <input {...register("password",
