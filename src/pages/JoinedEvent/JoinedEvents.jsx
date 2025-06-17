@@ -21,9 +21,9 @@ const JoinedEvents = () => {
     if (isPending) return <LoadingSpinner />
 
     return (
-        <div className="space-y-8">
-            <h2 className="card-title justify-center text-2xl">Joined Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
+        <div className="space-y-8 md:space-y-12">
+            <h2 className="card-title justify-center text-2xl md:text-5xl">Joined Events</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
                 {
                     events?.map(event => <JoinedEvent event={event} />)
                 }
