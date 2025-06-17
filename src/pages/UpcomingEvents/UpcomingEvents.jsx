@@ -41,8 +41,8 @@ const UpcomingEvents = () => {
     // if (isPending) return <LoadingSpinner />
 
     return (
-        <div className="max-w-screen-2xl mx-auto lg:mt-16 md:space-y-10">
-            <h2 className="card-title text-5xl justify-center">Upcoming Events Page</h2>
+        <div className="max-w-screen-2xl mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10">
+            <h2 className="card-title text-2xl md:text-5xl justify-center">Upcoming Events Page</h2>
             <div className="flex gap-12">
                 <form className="flex w-1/2" onSubmit={handleSearch} action="">
                     <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
@@ -63,7 +63,7 @@ const UpcomingEvents = () => {
             </div>
 
             {/* event */}
-            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
                 {isPending ? <LoadingSpinner /> :
                     upcomingEvents?.map(event => <UpcomingEvent event={event} />)
                 }
