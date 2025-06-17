@@ -4,14 +4,17 @@ import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import usePrivateRouteNavigation from "../../hooks/usePrivateRouteNavigation";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Navbar from "../../components/shared/Navbar/Navbar"
 import { useForm } from "react-hook-form";
 
 const Login = () => {
     const { signIn, user } = useAuth();
     // const errorMsg = useCustomErrorToast();
-    const { from, navigate } = usePrivateRouteNavigation();
+    // const { from, navigate } = usePrivateRouteNavigation();
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || '/';
     const {
         register,
         handleSubmit,
@@ -54,7 +57,7 @@ const Login = () => {
         }
     }, [errors.password?.type, errors.email?.type]);
 
-    if (user) navigate("/")
+    // if (user) navigate("/")
 
     return (
         <div>
@@ -103,7 +106,7 @@ const Login = () => {
                                     <input type='submit' value='Login' className="btn w-1/3  mt-4 bg-green-500 text-white border-none hover:bg-green-600" />
                                 </form>
                                 {/* go to register page */}
-                                <Link to="/register" className=''><a className="link link-hover text-green-500">Go to Register Page</a></Link>
+                                <Link to="/register" className="link link-hover text-green-500">Go to Register Page</Link>
                             </div>
                             <SocialLogin
                             ></SocialLogin>

@@ -3,9 +3,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import SocialLogin from '../../components/shared/SocialLogin/SocialLogin';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
-import usePrivateRouteNavigation from '../../hooks/usePrivateRouteNavigation';
 import { useEffect } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate, useNavigation } from 'react-router';
 import Navbar from '../../components/shared/Navbar/Navbar';
 
 const Register = () => {
@@ -14,12 +13,17 @@ const Register = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
     const { createUser, updateUserProfile, user } = useAuth();
-    const { navigate, from } = usePrivateRouteNavigation();
+    // const { navigate } = usePrivateRouteNavigation();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/")
+        }
+    }, [user, navigate])
 
     const onSubmit = (data) => {
-        // console.log('This is initial registered form data', data)
-
         createUser(data.email, data.password)
             .then(() => {
                 // set name and photo url
@@ -31,8 +35,6 @@ const Register = () => {
                             text: "You Have Sign up Successfully",
                             icon: "success"
                         })
-                        // navigate user
-                        navigate('/', { replace: true })
                     })
                     .catch(error => {
                         console.log(error)
@@ -68,7 +70,7 @@ const Register = () => {
         }
     }, [errors.password?.type, errors.email?.type, errors.photo?.type]);
 
-    if (user) navigate("/")
+    // if (user) return navigate("/")
 
     return (
         <div>
@@ -134,7 +136,7 @@ const Register = () => {
                                     <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 bg-green-500 border-none hover:bg-green-600" />
                                 </form>
                                 {/* go to login page */}
-                                <Link to="/login" className=''><a className="link link-hover text-green-500">Go to Login Page</a></Link>
+                                <Link to="/login" className="link link-hover text-green-500">Go to Login Page</Link>
                             </div>
                             <SocialLogin></SocialLogin>
                         </div>
