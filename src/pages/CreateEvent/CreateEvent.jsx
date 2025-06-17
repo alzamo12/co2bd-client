@@ -22,11 +22,11 @@ const CreateEvent = () => {
             name: user.displayName,
             email: user.email
         };
-        console.log(eventData)
+        // console.log(eventData)
         // post event data to database
         try {
             const { data } = await axiosSecure.post("/event", eventData);
-            console.log(data)
+            // console.log(data)
             if (data.insertedId) {
                 Swal.fire({
                     title: "Event Added Successfully!",

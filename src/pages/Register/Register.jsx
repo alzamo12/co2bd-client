@@ -18,7 +18,7 @@ const Register = () => {
     const { navigate, from } = usePrivateRouteNavigation();
 
     const onSubmit = (data) => {
-        console.log('This is initial registered form data', data)
+        // console.log('This is initial registered form data', data)
 
         createUser(data.email, data.password)
             .then(() => {

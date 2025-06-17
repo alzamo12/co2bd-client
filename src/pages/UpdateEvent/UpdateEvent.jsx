@@ -27,16 +27,16 @@ const UpdateEvent = () => {
             setSelectedDate(event.eventDate)
         }
     }, [event])
-    console.log(selectedDate)
-    console.log(event)
-
+    // console.log(selectedDate)
+    // console.log(event)
+// 
     const { mutateAsync } = useMutation({
         mutationFn: async (data) => {
             const res = await axiosSecure.put(`/event/${event?._id}`, data)
             return res.data
         },
         onSuccess: (data) => {
-            console.log(data)
+            // console.log(data)
             if (data.modifiedCount > 0) {
                 toast.success("File updated successfully")
             }

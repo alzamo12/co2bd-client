@@ -26,7 +26,7 @@ const Event = () => {
             return data
         },
         onSuccess: (data) => {
-            console.log(data)
+            // console.log(data)
             if (data.acknowledged) {
                 toast.success("You have Successfully Joined the Event")
             }

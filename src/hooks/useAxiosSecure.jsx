@@ -3,8 +3,8 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 
 const axiosSecure = axios.create({
-    // baseURL: "https://co2bd-server.vercel.app/"
-    baseURL: "http://localhost:5000/"
+    baseURL: "https://co2bd-server.vercel.app/"
+    // baseURL: "http://localhost:5000/"
 });
 
 const useAxiosSecure = () => {
@@ -16,7 +16,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.request.use(
         function (config) {
             const accessToken = user.accessToken;
-            console.log('this is inside interceptors',accessToken)
+            // console.log('this is inside interceptors',accessToken)
             config.headers.authorization = `Bearer ${accessToken}`
             return config;
         },

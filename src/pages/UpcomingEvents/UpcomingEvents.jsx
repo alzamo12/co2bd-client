@@ -22,7 +22,7 @@ const UpcomingEvents = () => {
         e.preventDefault()
         const text = e.target.search.value;
         setSearch(text);
-        console.log(text, search)
+        // console.log(text, search)
     };
 
     const handleFilter = (e) => {
