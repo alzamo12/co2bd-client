@@ -1,21 +1,38 @@
-import { useLoaderData } from "react-router";
+import { useParams } from "react-router";
 import UpdateEventForm from "../../components/UpdateEvent/UpdateEventForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const UpdateEvent = () => {
-    const event = useLoaderData();
-    const { user } = useAuth();
-    const { eventDate, _id } = event;
-    const [selectedDate, setSelectedDate] = useState(eventDate);
     const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+    const { id } = useParams();
+
+    const { data: event, isLoading } = useQuery({
+        queryKey: ["event", id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/event/${id}`);
+            return res.data
+        }
+    });
+
+    // const { eventDate, _id } = event;
+    const [selectedDate, setSelectedDate] = useState(event?.eventDate);
+    useEffect(() => {
+        if(event){
+            setSelectedDate(event.eventDate)
+        }
+    }, [event])
+    console.log(selectedDate)
+    console.log(event)
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data) => {
-            const res = await axiosSecure.put(`/event/${_id}`, data)
+            const res = await axiosSecure.put(`/event/${event?._id}`, data)
             return res.data
         },
         onSuccess: (data) => {
@@ -33,13 +50,16 @@ const UpdateEvent = () => {
         }
     })
 
+    if (isLoading) return <LoadingSpinner />
+
     const onSubmit = async (data) => {
         if (user.email === event.email) {
-            const { _id, name, email, timeStamp, ...rest } = event;
+            const { _id, name, timeStamp,email, ...rest } = event;
 
             const eventData = {
                 ...data,
-                eventDate: selectedDate === eventDate ? eventDate : selectedDate.toLocaleDateString()
+                email: user.email,
+                eventDate: selectedDate === event?.eventDate ? event?.eventDate : selectedDate.toLocaleDateString()
             };
 
             if (JSON.stringify(rest, Object.keys(rest).sort()) == JSON.stringify(eventData, Object.keys(eventData).sort())) {

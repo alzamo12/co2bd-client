@@ -82,8 +82,8 @@ const Login = () => {
                                         })}
                                         name='email'
                                         type="email"
-                                        className="input font-bold w-full focus:bg-transparent input-ghost
-                                                 border-black text-black"
+                                        className="input font-bold w-full focus:bg-transparent
+                                                 "
                                         placeholder="Email"
                                         required />
 
@@ -97,8 +97,7 @@ const Login = () => {
                                         })}
                                         name='password'
                                         type="password"
-                                        className="input font-bold focus:bg-transparent w-full input-ghost
-                                                 border-black text-black"
+                                        className="input font-bold focus:bg-transparent w-full"
                                         placeholder="Password"
                                         required />
                                     <input type='submit' value='Login' className="btn w-1/3  mt-4 bg-green-500 text-white border-none hover:bg-green-600" />

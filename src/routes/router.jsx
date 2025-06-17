@@ -43,7 +43,8 @@ const router = createBrowserRouter([
       {
         path: "update-event/:id",
         element: <PrivateRoute><UpdateEvent /></PrivateRoute>,
-        loader: async({params}) => fetch(`https://co2bd-server.vercel.app/event/${params.id}`)
+        // loader: async({params}) => fetch(`https://co2bd-server.vercel.app/event/${params.id}`)
+        // loader: async ({ params }) => fetch(`http://localhost:5000/event/${params.id}`)
       },
 
     ]

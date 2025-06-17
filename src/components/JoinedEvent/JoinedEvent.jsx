@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const JoinedEvent = ({ event }) => {
     const { image, title, type, location, eventDate, _id } = event;
     return (
-        <div className="card bg-base-100 shadow-sm">
+        <div className="card bg-base-100 shadow-sm dark:shadow-white">
             <figure className="px-10 pt-10">
                 <img
                     src={image}

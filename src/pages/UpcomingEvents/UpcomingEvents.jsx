@@ -43,21 +43,22 @@ const UpcomingEvents = () => {
     return (
         <div className="max-w-screen-2xl mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10">
             <h2 className="card-title text-2xl md:text-5xl justify-center">Upcoming Events Page</h2>
-            <div className="flex gap-12">
-                <form className="flex w-1/2" onSubmit={handleSearch} action="">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-12">
+                {/* search form */}
+                <form className="flex w-full md:w-1/2" onSubmit={handleSearch} action="">
                     <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
                     <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
                 </form>
 
                 {/* filter */}
-                <form className="flex w-1/3" onSubmit={handleFilter} action="">
+                <form className="flex w-full md:w-1/3" onSubmit={handleFilter} action="">
                     <select name="type" defaultValue="Pick a Type" className="select rounded-r-none focus:border-none w-1/2">
                         <option >All</option>
                         <option>Clean Up</option>
                         <option>Tree Plantation</option>
                         <option>Donation</option>
                     </select>
-                    <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
+                    <input type="submit" value="Filter" className="btn btn-neutral rounded-l-none" />
 
                 </form>
             </div>

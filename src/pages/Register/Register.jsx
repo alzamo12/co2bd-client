@@ -66,15 +66,7 @@ const Register = () => {
                 toast.error("invalid Photo URL")
                 break
         }
-        switch (errors.name?.type) {
-            case "minLength":
-                toast.error("username must have 4 letters")
-                break
-            case "pattern":
-                toast.error("Username must start with a letter and have a letter in it")
-                break
-        }
-    }, [errors.password?.type, errors.email?.type, errors.photo?.type, errors.name?.type]);
+    }, [errors.password?.type, errors.email?.type, errors.photo?.type]);
 
     if (user) navigate("/")
 
@@ -99,12 +91,9 @@ const Register = () => {
                                     <label className="label w-full">Your Name</label>
                                     <input {...register("name", {
                                         required: true,
-                                        minLength: 4,
-                                        pattern: /^[A-Za-z][A-Za-z ]*$/
                                     })}
                                         type="text"
-                                        className="input font-bold w-full  focus:bg-transparent input-ghost
-                                          border-black text-black"
+                                        className="input font-bold w-full  focus:bg-transparent "
                                         placeholder="Your Name"
                                         required />
                                     {/* email */}
@@ -115,7 +104,7 @@ const Register = () => {
                                     })}
                                         type="email"
                                         className="input font-bold w-full  focus:bg-transparent 
-                                                   input-ghost border-black text-black"
+                                             "
                                         placeholder="Email"
                                         required />
                                     {/* photo url */}
@@ -127,7 +116,7 @@ const Register = () => {
                                         })}
                                         type="text"
                                         className="input font-bold w-full  
-                                             focus:bg-transparent input-ghost border-black text-black"
+                                             focus:bg-transparent "
                                         placeholder="Photo URL"
                                         required />
                                     {/* password */}
@@ -140,7 +129,7 @@ const Register = () => {
                                         }
                                     )}
                                         type="password"
-                                        className=" input input-ghost focus:bg-transparent font-bold  w-full  border-black "
+                                        className=" input  focus:bg-transparent font-bold  w-full"
                                         placeholder="Password" />
                                     <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 bg-green-500 border-none hover:bg-green-600" />
                                 </form>

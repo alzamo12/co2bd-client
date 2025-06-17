@@ -20,7 +20,7 @@ const ManageEvents = () => {
 
     return (
         <div className="max-w-screen-2xl mx-auto mt-10 space-y-8">
-            <h2 className="card-title justify-center text-xl">Manage Your Events</h2>
+            <h2 className="card-title justify-center text-2xl md:text-4xl">Manage Your Events</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 w-10/12 mx-auto md:gap-12 gap-6">
                 {
                     events?.map(event => <ManageEvent key={event._id} event={event} />)

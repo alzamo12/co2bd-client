@@ -18,9 +18,8 @@ const CreateEventForm = ({ onSubmit, selectedDate, setSelectedDate }) => {
     return (
         <div className=" mb-0 md:w-2/3 md:mx-auto lg:mx-0 lg:w-full mt-10">
             <form fieldset onSubmit={handleSubmit(onSubmit)} className="fieldset md:w-full items-center font-medium grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-5">
-                <CreateEventInput errors={errors} rules={
-                    { minLength: 4, }
-                } register={register} type="Title" />
+                <CreateEventInput errors={errors} 
+                 register={register} type="Title" />
                 <CreateEventInput errors={errors} rules={{
                     pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg|webp)$/i
                 }} register={register} type="Image URL" />

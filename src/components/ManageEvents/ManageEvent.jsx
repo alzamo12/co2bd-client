@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 const ManageEvent = ({ event }) => {
     const { _id, image, title, type, eventDate, location } = event;
     return (
-        <div className="card bg-base-100 md:w-72 lg:w-80 shadow-sm px-5">
+        <div className="card bg-base-100 md:w-72 lg:w-80 shadow-sm px-5  dark:shadow-white">
             <figure className=" pt-10">
                 <img
                     src={image}

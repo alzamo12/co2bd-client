@@ -7,7 +7,7 @@ const UpcomingEvent = ({ event }) => {
 
     const { _id, image, title, location, type, eventDate } = event;
     return (
-        <div className="card bg-base-100 shadow-sm w-full">
+        <div className="card bg-base-100 shadow-sm dark:shadow-white w-full">
             <figure className="px-10 pt-10 ">
                 <img
                     src={image}
