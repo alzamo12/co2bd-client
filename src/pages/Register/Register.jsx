@@ -63,12 +63,7 @@ const Register = () => {
                 toast.error("Error: Invalid Email", { autoClose: 1500 });
                 break;
         }
-        switch (errors.photo?.type) {
-            case "pattern":
-                toast.error("invalid Photo URL")
-                break
-        }
-    }, [errors.password?.type, errors.email?.type, errors.photo?.type]);
+    }, [errors.password?.type, errors.email?.type]);
 
     // if (user) return navigate("/")
 
@@ -113,8 +108,7 @@ const Register = () => {
                                     <label className="label w-full">Photo URL</label>
                                     <input {...register("photo",
                                         {
-                                            required: true,
-                                            pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg|webp)$/i
+                                            required: true
                                         })}
                                         type="text"
                                         className="input font-bold w-full  
