@@ -1,12 +1,72 @@
-# React + Vite
+# Project Title
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*CO2BD. a PROJECT FOR EVENT MANAGEMENT WEBSITES*
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
 
-## Expanding the ESLint configuration
+This application is an event management website. It helps user to to find, join and create his own websites handily. This helps user to developed the social
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+* User registration and login (Firebase Auth)
+* Profile update (display name & photo URL)
+* Protected routes
+* Event management: create, update events
+* Date picker and validation logic
+* Loading spinners and toast notifications
+* Social login (e.g., Google, Facebook)
+* Theme customization
+* Input form validation
+* User will be able to see joined events data
+* Apply of JWT token
+* Log out in unauthorize or forbidden access
+
+## Tech Stack
+
+* **Frontend:** React, React Router, React Hook Form, tanstack Query, Tailwind CSS, daisyui, react-datepicker,
+* **Backend:** Firebase Authentication, Express.js, Mongodb, Firebase-admin
+* **HTTP:** Axios (with a secure instance)
+* **Notifications:** React-Toastify, SweetAlert2
+* **Deployment:** Frontend: Firebase,
+                  Backend: Vercel
+
+## Folder Structure
+
+```bash
+├── public                 # Static files and HTML template
+├── src
+│   ├── assets             # Images, icons, fonts
+│   ├── components         # Reusable UI components
+│   ├── firebase         # Reusable UI components
+│   ├── hooks              # Custom React hooks (useAuth, useAxiosSecure)
+│   ├── layouts              # layouts
+│   ├── pages              # Route-based page components (Register, Login, Home, EventEditor)
+│   ├── Providers           # API calls and Firebase config
+│   ├── routers            # React Context providers (AuthContext)
+│   ├── index.css             # Global styles and Tailwind config
+│   ├── main.jsx          # Entry point
+│   └── ...
+├── .env                   # Environment variables
+├── package.json           # Project metadata and scripts
+└── README.md              # Project documentation (this file)
+```
+
+
+## Configuration
+
+Create a `.env` file in the root and add the following:
+
+```env
+VITE_apiKey=your_api_key
+VITE_authDomain=your_project.firebaseapp.com
+VITE_projectId=your_project_id
+VITE_storageBucket=your_project.appspot.com
+VITE_messagingSenderId=your_sender_id
+VITE_appId=your_app_id
+```
+
+
+Project Name : CO2BD
+
+Project Link: https://co2bd-d6f4f.web.app/
