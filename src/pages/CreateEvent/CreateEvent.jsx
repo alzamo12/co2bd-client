@@ -18,7 +18,7 @@ const CreateEvent = () => {
         }
         const eventData = {
             ...data,
-            eventDate: selectedDate,
+            eventDate: selectedDate.toLocaleDateString(),
             name: user.displayName,
             email: user.email
         };

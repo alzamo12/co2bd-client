@@ -12,8 +12,8 @@ import img11 from "../../assets/featured/card11.jpg"
 
 const Featured = () => {
     return (
-        <div className="md:mt-20">
-            <h2 className="text-4xl font-medium text-center leading-12">Our Featuring Commitment <br />
+        <div className="mt-10 md:mt-20 space-y-5">
+            <h2 className="text-2xl lg:text-4xl font-medium text-center lg:leading-12">Our Featuring Commitment <br />
                 <span className="text-emerald-700">to Sustainable Development</span>
             </h2>
             <div className="container lg:max-w-screen-xl px-3 md:mx-auto md:mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

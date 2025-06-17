@@ -32,7 +32,7 @@ const Register = () => {
                             icon: "success"
                         })
                         // navigate user
-                        navigate(from, { replace: true })
+                        navigate('/', { replace: true })
                     })
                     .catch(error => {
                         console.log(error)
@@ -123,7 +123,7 @@ const Register = () => {
                                     <input {...register("photo",
                                         {
                                             required: true,
-                                            pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg)$/i
+                                            pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg|webp)$/i
                                         })}
                                         type="text"
                                         className="input font-bold w-full  

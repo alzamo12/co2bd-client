@@ -26,7 +26,7 @@ const UpdateEventForm = ({ event, onSubmit, selectedDate, setSelectedDate }) => 
                     { minLength: 4, }
                 } register={register} type="Title" />
                 <CreateEventInput rules={{
-                    pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg)$/i
+                    pattern: /^https?:\/\/.+\.(jpg|jpeg|png|gif|svg|webp)$/i
                 }} register={register} type="Image URL" />
                 <CreateEventInput register={register} type="Location" />
                 <CreateEventTextArea register={register} type="Description" />
