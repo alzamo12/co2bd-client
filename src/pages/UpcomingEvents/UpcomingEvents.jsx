@@ -3,20 +3,25 @@ import useAxiosPublic from "../../hooks/useAxiosPublic"
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import UpcomingEvent from "../../components/UpcomingEvents/UpcomingEvent";
 import { useState } from "react";
+import Pagination from "../../components/UpcomingEvents/Pagination";
 const UpcomingEvents = () => {
     const axiosPublic = useAxiosPublic();
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("");
-
-    const { data: upcomingEvents, isPending } = useQuery({
-        queryKey: ["upcomingEvent", search, filter],
+    const [page, setPage] = useState(1);
+    console.log(page)
+    const limit = 5;
+    const { data: eventsData, isPending } = useQuery({
+        queryKey: ["upcomingEvent", search, filter, page, limit],
         queryFn: async () => {
             const date = new Date().toLocaleDateString();
-            const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}&filter=${filter}`);
-            // console.log(data)
+            const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}&filter=${filter}&page=${page}&limit=${limit}`);
+            console.log(data)
             return data
-        }
-    })
+        },
+        keepPreviousData: true
+    });
+
 
     const handleSearch = e => {
         e.preventDefault()
@@ -38,7 +43,14 @@ const UpcomingEvents = () => {
         // console.log(type)
     }
 
-    // if (isPending) return <LoadingSpinner />
+    if (isPending) return <LoadingSpinner />
+    const { events: upcomingEvents, eventsCount=0 } = eventsData;
+
+    const totalPages = Math.ceil(Number(eventsCount) / limit);
+
+    const handlePage = (page) => {
+        setPage(page)
+    }
 
     return (
         <div className="max-w-screen-2xl mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10">
@@ -66,9 +78,15 @@ const UpcomingEvents = () => {
             {/* event */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-12">
                 {isPending ? <LoadingSpinner /> :
-                    upcomingEvents?.map(event => <UpcomingEvent event={event} />)
+                    upcomingEvents?.map(event => <UpcomingEvent key={event._id} event={event} />)
                 }
             </div>
+            <Pagination
+                totalPages={totalPages}
+                onPageChange={handlePage}
+                siblingCount={1}
+                boundaryCount={1}
+            />
         </div >
     );
 };
