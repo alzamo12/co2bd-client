@@ -44,7 +44,7 @@ const UpcomingEvents = () => {
     }
 
     if (isPending) return <LoadingSpinner />
-    const { events: upcomingEvents, eventsCount=0 } = eventsData;
+    const { events: upcomingEvents, eventsCount = 0 } = eventsData;
 
     const totalPages = Math.ceil(Number(eventsCount) / limit);
 
@@ -53,13 +53,13 @@ const UpcomingEvents = () => {
     }
 
     return (
-        <div className="max-w-screen-2xl mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10">
+        <div className="max-w-screen-2xl mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10 ">
             <h2 className="card-title text-2xl md:text-5xl justify-center">Upcoming Events Page</h2>
             <div className="flex flex-col md:flex-row gap-3 md:gap-12">
                 {/* search form */}
-                <form className="flex w-full md:w-1/2" onSubmit={handleSearch} action="">
-                    <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
-                    <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
+                <form className="flex w-full md:w-1/2 " onSubmit={handleSearch} action="">
+                        <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
+                        <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
                 </form>
 
                 {/* filter */}
