@@ -9,6 +9,7 @@ const EventType = ({register}) => {
                 <option>Clean Up</option>
                 <option>Tree Plantation</option>
                 <option>Donation</option>
+                <option>Assembly</option>
             </select>
         </fieldset>
     );

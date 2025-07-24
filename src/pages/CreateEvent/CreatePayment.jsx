@@ -1,25 +1,15 @@
-import React from 'react';
+import { motion } from "framer-motion";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
+import CreatePaymentForm from "./CreatePaymentForm";
 
-const CreatePayment = ({ wizard }) => {
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+const CreatePayment = ({ wizard, onSuccess }) => {
     return (
-        <div>
-            <fieldset fieldset="true" className="fieldset">
-                <label className="label">Email</label>
-                <input type="email" className="input" placeholder="Email" />
-                <label className="label">Password</label>
-                <input type="password" className="input" placeholder="Password" />
-                <div><a className="link link-hover">Forgot password?</a></div>
-                <button className="btn btn-neutral mt-4">Login</button>
-            </fieldset>
-            <button
-                type="button"
-                onClick={() => wizard?.previousStep()}
-                className="btn btn-outline"
-            >
-                ← Back
-            </button>
-
-        </div>
+        <Elements stripe={stripePromise}>
+            <CreatePaymentForm wizard={wizard} onSuccess={onSuccess} />
+        </Elements>
     );
 };
 

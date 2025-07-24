@@ -16,12 +16,16 @@ const UpcomingEvents = () => {
         queryFn: async () => {
             const date = new Date().toLocaleDateString();
             const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}&filter=${filter}&page=${page}&limit=${limit}`);
-            console.log(data)
+            console.log(data, search)
             return data
         },
-        keepPreviousData: true
+        keepPreviousData: true,
+        onSuccess: (data) => {
+            if (data.currentPage !== page) {
+                setPage(data.currentPage);
+            }
+        }
     });
-
 
     const handleSearch = e => {
         e.preventDefault()
@@ -58,8 +62,8 @@ const UpcomingEvents = () => {
             <div className="flex flex-col md:flex-row gap-3 md:gap-12">
                 {/* search form */}
                 <form className="flex w-full md:w-1/2 " onSubmit={handleSearch} action="">
-                        <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
-                        <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
+                    <input name="search" type="text" placeholder="Type here" className="input rounded-r-none focus:border-none" />
+                    <input type="submit" value="Search" className="btn btn-neutral rounded-l-none" />
                 </form>
 
                 {/* filter */}
