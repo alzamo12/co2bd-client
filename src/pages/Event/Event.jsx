@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import { BiCategory } from "react-icons/bi";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import Comments from "../../components/Event/Comments";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 
 const Event = () => {
     const params = useParams();
@@ -53,17 +56,18 @@ const Event = () => {
 
     if (isPending) return <LoadingSpinner />
 
-    const { image, title, description, type, location, eventDate, name } = event;
+    const { _id, image, title, description, type, location, eventDate, name } = event;
 
     return (
-        <div className="card lg:card-side bg-base-100 shadow-sm mt-20 mx-2 md:mx-0 ">
-            <figure className="w-full lg:w-full">
-                <img
-                    src={image}
-                    className="w-full"
-                    alt="Album" />
-            </figure>
-            <div className="px-10 py-8 space-y-4 w-full">
+        <div>
+            <div className="card lg:card-side bg-base-100 shadow-sm mt-20 mx-2 md:mx-0 ">
+                <figure className="w-full lg:w-full">
+                    <img
+                        src={image}
+                        className="w-full"
+                        alt="Album" />
+                </figure>
+                <div className="px-10 py-8 space-y-4 w-full">
                     <h2 className="card-title text-xl">{title}!</h2>
                     <h4 className="card-title">Author name: {name}</h4>
                     <p>{description}</p>
@@ -73,10 +77,15 @@ const Event = () => {
                         <p className="flex gap-2 text-base items-center"><FaMapMarkerAlt />{location}</p>
                         <p className="flex gap-2 text-base items-center"><FaCalendarAlt />{eventDate}</p>
                     </div>
-                <div className="card-actions justify-end">
-                    <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
+                    <div>
+                        <div className="card-actions justify-end flex items-center gap-4">
+                            <button><CiHeart className=" text-4xl " /></button>
+                            <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <Comments eventId={_id} />
         </div>
     );
 };
