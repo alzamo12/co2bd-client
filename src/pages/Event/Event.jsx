@@ -61,6 +61,15 @@ const Event = () => {
             queryClient.invalidateQueries(['like'])
             console.log(data)
         }
+    });
+
+    const { data: eventLikeCount } = useQuery({
+        queryKey: ['eventLikeCount', eventId],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/eventLikeCount/${eventId}`)
+            console.log("event like count", res.data)
+            return res.data
+        }
     })
 
     const handleJoinEvent = async event => {
@@ -116,9 +125,15 @@ const Event = () => {
                                     <button><FaHeart className="text-4xl" /></button>
                                     :
                                     like ?
-                                        <button><FaHeart className="text-4xl text-red-500" /></button>
+                                        <div>
+                                            <button><FaHeart className="text-4xl text-red-500" /></button>
+                                            <span>{eventLikeCount}</span>
+                                        </div>
                                         :
-                                        <button onClick={() => handleLike()}><FaHeart className="text-4xl" /></button>
+                                        <div>
+                                            <button onClick={() => handleLike()}><FaHeart className="text-4xl" /></button>
+                                            <span>{eventLikeCount}</span>
+                                        </div>
 
                             }
                             <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
