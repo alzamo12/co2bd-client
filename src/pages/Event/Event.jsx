@@ -70,6 +70,18 @@ const Event = () => {
             console.log("event like count", res.data)
             return res.data
         }
+    });
+
+    const { mutateAsync: deleteLike } = useMutation({
+        mutationFn: async (id) => {
+            const res = await axiosSecure.delete(`/like/${id}`);
+            return res.data
+        },
+        onSuccess: (data) => {
+            toast.success("like removed successfully")
+            queryClient.invalidateQueries(['like'])
+            console.log(data)
+        }
     })
 
     const handleJoinEvent = async event => {
@@ -93,6 +105,10 @@ const Event = () => {
             user_email: user?.email,
         };
         likeAsync(likeData)
+    };
+
+    const handleDeleteLike = async (id) => {
+        deleteLike(id)
     }
 
     if (isPending) return <LoadingSpinner />
@@ -126,7 +142,7 @@ const Event = () => {
                                     :
                                     like ?
                                         <div>
-                                            <button><FaHeart className="text-4xl text-red-500" /></button>
+                                            <button onClick={() => handleDeleteLike(like?._id)}><FaHeart className="text-4xl text-red-500" /></button>
                                             <span>{eventLikeCount}</span>
                                         </div>
                                         :

@@ -1,5 +1,6 @@
 import StarRatings from 'react-star-ratings';
 import LoadingSpinner from '../shared/LoadingSpinner/LoadingSpinner';
+import Comment from './Comment';
 
 const CommentsListing = ({ comments, setPage, page, totalPages, isLoading }) => {
     if (isLoading) return <LoadingSpinner />
@@ -8,20 +9,7 @@ const CommentsListing = ({ comments, setPage, page, totalPages, isLoading }) => 
             <h3 className="text-xl font-semibold">Comments & Ratings</h3>
             {/* List existing comments */}
             {comments?.map(c => (
-                <div key={c?._id} className="p-4 bg-gray-100 rounded-lg">
-                    <div className="flex items-center space-x-2 mb-2">
-                        <img src={c?.userPhoto} alt="" className="w-8 h-8 rounded-full" />
-                        <span className="font-medium">{c?.userName}</span>
-                        <StarRatings
-                            rating={c?.rating}
-                            starDimension="16px"
-                            starSpacing="2px"
-                            starRatedColor="#f59e0b"
-                        />
-                    </div>
-                    <p>{c?.text}</p>
-                    <small className="text-gray-500">{new Date(c?.commentedDate).toLocaleString()}</small>
-                </div>
+                <Comment c={c} />
             ))}
 
             <div className="join grid grid-cols-3 w-96">
