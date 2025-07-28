@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
@@ -8,13 +8,13 @@ import { BiCategory } from "react-icons/bi";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import Comments from "../../components/Event/Comments";
 import { FaHeart } from "react-icons/fa";
-import { useState } from "react";
 
 const Event = () => {
     const params = useParams();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    const [isLiked, setIsLiked] = useState(false)
+    // const [isLiked, setIsLiked] = useState(false)
+    const queryClient = useQueryClient();
 
     const { data: event, isPending } = useQuery({
         queryKey: ["event"],
@@ -23,7 +23,8 @@ const Event = () => {
             return data
         }
     });
-
+    const eventId = event?._id;
+    const userEmail = user?.email
     const { mutateAsync } = useMutation({
         mutationFn: async (event) => {
             const { data } = await axiosSecure.post("/join-event", event);
@@ -39,6 +40,27 @@ const Event = () => {
             console.error(error)
             toast.error("Error occurred")
         }
+    });
+
+    const { data: like } = useQuery({
+        queryKey: ['like', eventId, userEmail],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/like?targetId=${eventId}&userEmail=${userEmail}`);
+            console.log(res)
+            return res.data
+        }
+    })
+
+    const { mutateAsync: likeAsync, isPending: likePending } = useMutation({
+        mutationFn: async (likeData) => {
+            const res = await axiosSecure.post(`/likes`, likeData);
+            return res.data
+        },
+        onSuccess: async (data) => {
+            toast.success("you have liked Successfully")
+            queryClient.invalidateQueries(['like'])
+            console.log(data)
+        }
     })
 
     const handleJoinEvent = async event => {
@@ -53,6 +75,15 @@ const Event = () => {
         mutateAsync(eventData)
 
         // console.log(eventData)
+    };
+
+    const handleLike = async () => {
+        const likeData = {
+            target_id: event?._id,
+            target_type: 'event',
+            user_email: user?.email,
+        };
+        likeAsync(likeData)
     }
 
     if (isPending) return <LoadingSpinner />
@@ -81,10 +112,13 @@ const Event = () => {
                     <div>
                         <div className="card-actions justify-end flex items-center gap-4">
                             {
-                                isLiked ?
-                                    <button onClick={() => setIsLiked(false)}><FaHeart className="text-4xl text-red-500" /></button>
+                                likePending ?
+                                    <button><FaHeart className="text-4xl" /></button>
                                     :
-                                    <button onClick={() => setIsLiked(true)}><FaHeart className="text-4xl" /></button>
+                                    like ?
+                                        <button><FaHeart className="text-4xl text-red-500" /></button>
+                                        :
+                                        <button onClick={() => handleLike()}><FaHeart className="text-4xl" /></button>
 
                             }
                             <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
