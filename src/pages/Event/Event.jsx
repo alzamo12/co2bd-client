@@ -7,13 +7,14 @@ import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinne
 import { BiCategory } from "react-icons/bi";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import Comments from "../../components/Event/Comments";
-import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
+import { useState } from "react";
 
 const Event = () => {
     const params = useParams();
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const [isLiked, setIsLiked] = useState(false)
 
     const { data: event, isPending } = useQuery({
         queryKey: ["event"],
@@ -79,7 +80,13 @@ const Event = () => {
                     </div>
                     <div>
                         <div className="card-actions justify-end flex items-center gap-4">
-                            <button><CiHeart className=" text-4xl " /></button>
+                            {
+                                isLiked ?
+                                    <button onClick={() => setIsLiked(false)}><FaHeart className="text-4xl text-red-500" /></button>
+                                    :
+                                    <button onClick={() => setIsLiked(true)}><FaHeart className="text-4xl" /></button>
+
+                            }
                             <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
                         </div>
                     </div>
