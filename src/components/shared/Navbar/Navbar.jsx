@@ -4,12 +4,35 @@ import NavbarEnd from './NavbarEnd';
 import NavbarStart from './NavbarStart';
 import useAuth from "../../../hooks/useAuth"
 import NavLoginBtn from './NavLoginBtn';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
-
+    const axiosPublic = useAxiosPublic();
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : "light");
-    // const { theme, setTheme } = useContext(ThemeContext);
+    const [page, setPage] = useState(1);
+    const limit = 10;
+
+    // notification get api
+    const { data: notificationCount } = useQuery({
+        queryKey: ['notificationCount', user?.email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/notification/unread-count/${user?.email}`);
+            console.log(res.data)
+            return res.data.result;
+        }
+    });
+
+    const { data: notifications } = useQuery({
+        queryKey: ['notification', user?.email, page, limit],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/notifications/${user?.email}?page=${page}&limit=${limit}`);
+            console.log("your notifications", res.data)
+            return res.data
+        }
+    })
+
     const handleToggle = (e) => {
         if (e.target.checked) {
             setTheme("dark")
@@ -37,7 +60,10 @@ const Navbar = () => {
             .catch(error => {
                 console.log(error)
             })
-    }
+    };
+
+    // fetch notification count api
+    const totalPages = Math.ceil(Number(notifications?.notificationsCount) / limit);
 
 
     return (
@@ -49,7 +75,17 @@ const Navbar = () => {
             <div>
                 {
                     user ?
-                        <NavbarEnd handleToggle={handleToggle} handleLogOut={handleLogOut} user={user} navLinks={navLinks} />
+                        <NavbarEnd
+                         page={page} 
+                         setPage={setPage} 
+                         notificationCount={notificationCount}
+                          handleToggle={handleToggle} 
+                          handleLogOut={handleLogOut} 
+                          user={user} 
+                          navLinks={navLinks}
+                          notifications={notifications}
+                          totalPages={totalPages}
+                           />
                         :
 
                         <div className='flex gap-2'>

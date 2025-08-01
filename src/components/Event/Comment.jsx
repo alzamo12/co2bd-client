@@ -5,13 +5,16 @@ import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 import { FaHeart } from 'react-icons/fa';
+import useNotification from '../../hooks/useNotification';
 
-const Comment = ({ c }) => {
+const Comment = ({ c, eventTitle, eventId }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const queryClient = useQueryClient();
     const userEmail = user?.email;
     const { _id } = c;
+    const notificationAsync = useNotification();
+
     const { data: like } = useQuery({
         queryKey: ['like', _id, userEmail],
         queryFn: async () => {
@@ -21,6 +24,15 @@ const Comment = ({ c }) => {
         }
     })
 
+    const { data: commentLikeCount } = useQuery({
+        queryKey: ['eventLikeCount', _id],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/eventLikeCount/${_id}`)
+            console.log("event like count", res.data)
+            return res.data
+        }
+    });
+
     const { mutateAsync: likeAsync, isPending: likePending } = useMutation({
         mutationFn: async (likeData) => {
             const res = await axiosSecure.post(`/likes`, likeData);
@@ -29,16 +41,18 @@ const Comment = ({ c }) => {
         onSuccess: async (data) => {
             toast.success("you have liked Successfully")
             queryClient.invalidateQueries(['like'])
-            console.log(data)
-        }
-    });
 
-    const { data: commentLikeCount } = useQuery({
-        queryKey: ['eventLikeCount', _id],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/eventLikeCount/${_id}`)
-            console.log("event like count", res.data)
-            return res.data
+            const notifyData = {
+                receiverId : c.userEmail,
+                senderId: user?.email,
+                type: 'comment-like',
+                typeId: _id,
+                postId: eventId,
+                message: `${user?.displayName} liked you comment on ${eventTitle} post`
+            };
+
+            notificationAsync(notifyData)
+            console.log(data)
         }
     });
 

@@ -1,39 +1,9 @@
 import StarRatings from 'react-star-ratings';
 import { useForm } from 'react-hook-form';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import LoadingSpinner from '../shared/LoadingSpinner/LoadingSpinner';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { toast } from 'react-toastify';
-import { useState } from 'react';
 import CommentsListing from './CommentsListing';
 import AddComment from './AddComment';
 
-const Comments = ({ eventId }) => {
-    const queryClient = useQueryClient();
-    const axiosSecure = useAxiosSecure();
-    const [page, setPage] = useState(1);
-    const limit = 2;
-    // Fetch existing comments
-    const { data: { comments = [], commentsCount } = {}, isLoading } = useQuery({
-        queryKey: ['comments', eventId, limit, page],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/comments?eventId=${eventId}&page=${page}&limit=${limit}`);
-            return res.data
-        }
-    })
-
-    // Mutation for posting comments
-    const { mutateAsync: postComment } = useMutation({
-        mutationFn: async (newComment) => {
-            const res = await axiosSecure.post(`/comments`, newComment);
-            return res.data
-        },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries(['comments', eventId]);
-            console.log(data)
-            toast.success("You have rated the event")
-        }
-    })
+const Comments = ({ eventId,eventTitle, comments, commentsCount, isLoading, page, limit, postComment, setPage }) => {
 
     // Form for new comments
     const { register, handleSubmit, reset, setValue, watch } = useForm({
@@ -68,6 +38,8 @@ const Comments = ({ eventId }) => {
             />
             <CommentsListing
                 comments={comments}
+                eventTitle={eventTitle}
+                eventId={eventId}
                 page={page}
                 setPage={setPage}
                 totalPages={totalPages}

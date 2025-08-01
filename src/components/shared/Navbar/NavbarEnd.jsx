@@ -1,10 +1,34 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import NotificationModal from "./NotificationModal";
 
-const NavbarEnd = ({ navLinks, user, handleLogOut, handleToggle }) => {
+const NavbarEnd = ({ navLinks, user, handleLogOut, handleToggle, notificationCount, setPage, page, notifications, totalPages }) => {
+    const axiosPublic = useAxiosPublic();
+    const [isOpen, setIsOpen] = useState(false);
+    const queryClient = useQueryClient();
+
+    const { mutateAsync: notificationUpdateAsync } = useMutation({
+        mutationFn: async () => {
+            const res = await axiosPublic.patch(`/notifications/${user?.email}`);
+            return res.data
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(['notification', 'notificationCount'])
+            console.log(data)
+            // toast.success
+        }
+    });
+
+    const handleOpen = () => {
+        setIsOpen(true)
+        notificationUpdateAsync()
+    }
+
     return (
         <div className="navbar-end  w-auto gap-2 md:gap-4">
             {/* logout button */}
             <button onClick={handleLogOut} className="btn bg-green-500 md:w-auto px-2 md:px-4 text-xs md:text-sm  text-white">Logout</button>
-
             {/* pfp  */}
             <div className="dropdown group dropdown-end">
                 {/* pfp avatar */}
@@ -44,6 +68,24 @@ const NavbarEnd = ({ navLinks, user, handleLogOut, handleToggle }) => {
                         d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
                 </svg>
             </label>
+            <button onClick={() => handleOpen()} className="btn btn-ghost btn-circle">
+                <div className="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /> </svg>
+                    <span className="badge badge-sm rounded-full badge-neutral indicator-item">{notificationCount}</span>
+                </div>
+            </button>
+
+            {/* modal */}
+            {
+                isOpen &&
+                <NotificationModal
+                    notifications={notifications}
+                    page={page}
+                    setPage={setPage}
+                    totalPages={totalPages}
+                    setIsOpen={setIsOpen}
+                />
+            }
         </div>
     );
 };

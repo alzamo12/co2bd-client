@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -8,13 +9,18 @@ import { BiCategory } from "react-icons/bi";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import Comments from "../../components/Event/Comments";
 import { FaHeart } from "react-icons/fa";
+import { useState } from "react";
+import useNotification from "../../hooks/useNotification";
 
 const Event = () => {
     const params = useParams();
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
+    const notificationAsync = useNotification();
     const { user } = useAuth();
-    // const [isLiked, setIsLiked] = useState(false)
     const queryClient = useQueryClient();
+    const [page, setPage] = useState(1);
+    const limit = 2;
 
     const { data: event, isPending } = useQuery({
         queryKey: ["event"],
@@ -46,11 +52,24 @@ const Event = () => {
         queryKey: ['like', eventId, userEmail],
         queryFn: async () => {
             const res = await axiosSecure.get(`/like?targetId=${eventId}&userEmail=${userEmail}`);
-            console.log(res)
+            // console.log(res)
             return res.data
         }
     })
 
+    // notification post api when a user like an event or comment
+    // const { mutateAsync: notificationAsync } = useMutation({
+    //     mutationFn: async (data) => {
+    //         const res = await axiosPublic.post("/notification", data);
+    //         return res.data
+    //     },
+    //     onSuccess: async (data) => {
+    //         console.log('notification post api', data);
+    //         queryClient.invalidateQueries("notification", "notificationCount")
+    //     }
+    // })
+
+    // like post api => update database when a user like a post
     const { mutateAsync: likeAsync, isPending: likePending } = useMutation({
         mutationFn: async (likeData) => {
             const res = await axiosSecure.post(`/likes`, likeData);
@@ -59,7 +78,18 @@ const Event = () => {
         onSuccess: async (data) => {
             toast.success("you have liked Successfully")
             queryClient.invalidateQueries(['like'])
-            console.log(data)
+            // console.log(data)
+
+            // create notification post data
+            const notificationData = {
+                receiverId: event?.email,
+                senderId: user?.email,
+                type: "like",
+                typeId: eventId,
+                postId: data?.insertedId,
+                message: `${user?.displayName} liked your post`
+            };
+            notificationAsync(notificationData)
         }
     });
 
@@ -67,7 +97,7 @@ const Event = () => {
         queryKey: ['eventLikeCount', eventId],
         queryFn: async () => {
             const res = await axiosSecure.get(`/eventLikeCount/${eventId}`)
-            console.log("event like count", res.data)
+            // console.log("event like count", res.data)
             return res.data
         }
     });
@@ -80,9 +110,45 @@ const Event = () => {
         onSuccess: (data) => {
             toast.success("like removed successfully")
             queryClient.invalidateQueries(['like'])
-            console.log(data)
+            // console.log(data)
+        }
+    });
+
+    // comment related fetch
+
+    // Fetch existing comments
+    const { data: { comments = [], commentsCount } = {}, isLoading } = useQuery({
+        queryKey: ['comments', eventId, limit, page],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/comments?eventId=${eventId}&page=${page}&limit=${limit}`);
+            return res.data
         }
     })
+
+    // Mutation for posting comments
+    const { mutateAsync: postComment } = useMutation({
+        mutationFn: async (newComment) => {
+            const res = await axiosSecure.post(`/comments`, newComment);
+            return res.data
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(['comments', eventId]);
+            console.log(data);
+            toast.success("You have rated the event")
+
+            const notifyData = {
+                receiverId: event?.email,
+                senderId: user?.email,
+                type: "comment",
+                typeId: event?._id,
+                postId: data?.insertedId,
+                message: `${user?.displayName} commented on your event`
+            }
+
+            notificationAsync(notifyData)
+        }
+    });
+
 
     const handleJoinEvent = async event => {
         const { _id, ...rest } = event;
@@ -98,6 +164,7 @@ const Event = () => {
         // console.log(eventData)
     };
 
+    // handle like button
     const handleLike = async () => {
         const likeData = {
             target_id: event?._id,
@@ -157,7 +224,17 @@ const Event = () => {
                     </div>
                 </div>
             </div>
-            <Comments eventId={_id} />
+            <Comments
+                comments={comments}
+                commentsCount={commentsCount}
+                postComment={postComment}
+                isLoading={isLoading}
+                page={page}
+                limit={limit}
+                setPage={setPage}
+                eventId={_id}
+                eventTitle={title}
+            />
         </div>
     );
 };
