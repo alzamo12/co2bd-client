@@ -1,12 +1,24 @@
+import { EmailAuthCredential } from 'firebase/auth';
 import useAuth from '../../../hooks/useAuth';
+import useCreateUser from '../../../hooks/useCreateUser';
 import usePrivateRouteNavigation from '../../../hooks/usePrivateRouteNavigation';
 
 const SocialLogin = () => {
     const { googleSignIn } = useAuth();
     const { from, navigate } = usePrivateRouteNavigation();
+    const userAsync = useCreateUser();
+
     const handleSocialLogin = () => {
         googleSignIn()
-            .then(() => {
+            .then((result) => {
+                const user = result?.user
+                const data = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photo: user?.photoURL,
+                    password: null
+                };
+                userAsync(data)
                 navigate(from)
             })
             .catch(error => {

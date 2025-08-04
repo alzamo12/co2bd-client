@@ -4,8 +4,10 @@ import SocialLogin from '../../components/shared/SocialLogin/SocialLogin';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
-import { Link, useNavigate, useNavigation } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Navbar from '../../components/shared/Navbar/Navbar';
+import useCreateUser from '../../hooks/useCreateUser';
+
 
 const Register = () => {
     const {
@@ -15,26 +17,32 @@ const Register = () => {
     } = useForm();
     const navigate = useNavigate();
     const { createUser, updateUserProfile, user } = useAuth();
-    // const { navigate } = usePrivateRouteNavigation();
+    const userAsync = useCreateUser();
 
     useEffect(() => {
         if (user) {
             navigate("/")
         }
-    }, [user, navigate])
+    }, [user, navigate]);
 
     const onSubmit = (data) => {
         createUser(data.email, data.password)
-            .then(() => {
+            .then((result) => {
+                // console.log(result)
                 // set name and photo url
-                updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
+                updateUserProfile(data?.name, data?.photo)
+                    .then(async () => {
                         // success alert after successfully login
                         Swal.fire({
                             title: "Good job!",
                             text: "You Have Sign up Successfully",
                             icon: "success"
-                        })
+                        });
+
+                        const token = result?.user?.accessToken;
+                        // save user in database
+                        userAsync({ data, token })
+
                     })
                     .catch(error => {
                         console.log(error)
@@ -47,7 +55,7 @@ const Register = () => {
                 // show the splitted error using react-toastify
                 toast.error(`Oppss! Please try again: ${newError}`, { autoClose: 1500 })
             })
-    }
+    };
 
     useEffect(() => {
         switch (errors.password?.type) {

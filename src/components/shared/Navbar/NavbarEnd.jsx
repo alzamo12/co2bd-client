@@ -3,7 +3,7 @@ import { useState } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import NotificationModal from "./NotificationModal";
 
-const NavbarEnd = ({ navLinks, user, handleLogOut, handleToggle, notificationCount, setPage, page, notifications, totalPages }) => {
+const NavbarEnd = ({ notificationLoading, navLinks, user, handleLogOut, handleToggle, notificationCount, setPage, page, notifications, totalPages }) => {
     const axiosPublic = useAxiosPublic();
     const [isOpen, setIsOpen] = useState(false);
     const queryClient = useQueryClient();
@@ -79,6 +79,7 @@ const NavbarEnd = ({ navLinks, user, handleLogOut, handleToggle, notificationCou
             {
                 isOpen &&
                 <NotificationModal
+                    notificationLoading={notificationLoading}
                     notifications={notifications}
                     page={page}
                     setPage={setPage}

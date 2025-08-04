@@ -10,6 +10,9 @@ import Event from "../pages/Event/Event";
 import JoinedEvents from "../pages/JoinedEvent/JoinedEvents";
 import ManageEvents from "../pages/ManageEvents/ManageEvents";
 import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
+import Stats from "../pages/AdminDashboard/Stats/Stats";
+import AdminDashboard from "../layouts/AdminDashboard";
+import Users from "../pages/AdminDashboard/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +59,20 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/admin-dashboard",
+    element: <AdminDashboard/>,
+    children: [
+      {
+        path: "admin-stats",
+        element: <Stats />
+      },
+      {
+        path: "users",
+        Component: Users
+      }
+    ]
   }
 ]);
 

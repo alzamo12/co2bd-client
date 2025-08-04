@@ -6,31 +6,37 @@ import useAuth from "../../../hooks/useAuth"
 import NavLoginBtn from './NavLoginBtn';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useUserRole from '../../../hooks/useUserRole';
 const Navbar = () => {
 
     const { user, logOut } = useAuth();
     const axiosPublic = useAxiosPublic();
+    const userRole = useUserRole();
     const [theme, setTheme] = useState(localStorage.getItem('theme') ? localStorage.getItem('theme') : "light");
     const [page, setPage] = useState(1);
     const limit = 10;
+
+    // console.log('this is user role',userRole)
 
     // notification get api
     const { data: notificationCount } = useQuery({
         queryKey: ['notificationCount', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/notification/unread-count/${user?.email}`);
-            console.log(res.data)
+            // console.log(res.data)
             return res.data.result;
-        }
+        },
+        enabled: !!user
     });
 
-    const { data: notifications } = useQuery({
+    const { data: notifications, isPending: notificationLoading } = useQuery({
         queryKey: ['notification', user?.email, page, limit],
         queryFn: async () => {
             const res = await axiosPublic.get(`/notifications/${user?.email}?page=${page}&limit=${limit}`);
-            console.log("your notifications", res.data)
+            // console.log("your notifications", res.data)
             return res.data
-        }
+        },
+        enabled: !!user
     })
 
     const handleToggle = (e) => {
@@ -49,6 +55,12 @@ const Navbar = () => {
     }, [theme])
 
     const navLinks = <>
+        {
+            userRole?.role === 'admin' ?
+                <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>
+                :
+                <li><Link to="/user-dashboard">User Dashboard</Link></li>
+        }
         <li><Link to="create-event">Create Events</Link></li>
         <li><Link to="manage-events">Manage Events</Link></li>
         <li><Link to="joined-events">Joined Events</Link></li>
@@ -76,16 +88,17 @@ const Navbar = () => {
                 {
                     user ?
                         <NavbarEnd
-                         page={page} 
-                         setPage={setPage} 
-                         notificationCount={notificationCount}
-                          handleToggle={handleToggle} 
-                          handleLogOut={handleLogOut} 
-                          user={user} 
-                          navLinks={navLinks}
-                          notifications={notifications}
-                          totalPages={totalPages}
-                           />
+                            page={page}
+                            setPage={setPage}
+                            notificationCount={notificationCount}
+                            handleToggle={handleToggle}
+                            handleLogOut={handleLogOut}
+                            user={user}
+                            navLinks={navLinks}
+                            notifications={notifications}
+                            totalPages={totalPages}
+                            notificationLoading={notificationLoading}
+                        />
                         :
 
                         <div className='flex gap-2'>

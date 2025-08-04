@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
     // add a request interceptors
     axiosSecure.interceptors.request.use(
         function (config) {
-            const accessToken = user.accessToken;
+            const accessToken = user?.accessToken;
             // console.log('this is inside interceptors',accessToken)
             config.headers.authorization = `Bearer ${accessToken}`
             return config;
@@ -31,7 +31,7 @@ const useAxiosSecure = () => {
             return response
         },
         async (error) => {
-            const status = error.response.status;
+            const status = error?.response?.status;
             if (status === 401 || status === 403) {
                 await logOut()
                 navigate("/login")

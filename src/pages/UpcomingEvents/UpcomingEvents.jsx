@@ -9,14 +9,14 @@ const UpcomingEvents = () => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("");
     const [page, setPage] = useState(1);
-    console.log(page)
+    // console.log(page)
     const limit = 5;
     const { data: eventsData, isPending } = useQuery({
         queryKey: ["upcomingEvent", search, filter, page, limit],
         queryFn: async () => {
             const date = new Date().toLocaleDateString();
             const { data } = await axiosPublic.get(`/events?queryDate=${date}&title=${search}&filter=${filter}&page=${page}&limit=${limit}`);
-            console.log(data, search)
+            // console.log(data, search)
             return data
         },
         keepPreviousData: true,

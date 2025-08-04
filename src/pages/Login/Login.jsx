@@ -2,16 +2,15 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import usePrivateRouteNavigation from "../../hooks/usePrivateRouteNavigation";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router";
 import Navbar from "../../components/shared/Navbar/Navbar"
 import { useForm } from "react-hook-form";
+import useCreateUser from "../../hooks/useCreateUser";
 
 const Login = () => {
-    const { signIn, user } = useAuth();
-    // const errorMsg = useCustomErrorToast();
-    // const { from, navigate } = usePrivateRouteNavigation();
+    const { signIn } = useAuth();
+    const userAsync = useCreateUser();
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || '/';
@@ -32,6 +31,8 @@ const Login = () => {
                     text: "You Have Login Successfully",
                     icon: "success"
                 })
+
+                userAsync({ email: email })
                 navigate(from, { replace: true })
             })
             .catch(error => {
