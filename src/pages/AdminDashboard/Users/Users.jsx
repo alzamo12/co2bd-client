@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import {  useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/shared/LoadingSpinner/LoadingSpinner';
 import User from '../../../components/Users/User';
@@ -22,7 +22,9 @@ const Users = () => {
             const res = await axiosSecure.get("/users");
             return res.data
         }
-    })
+    });
+
+    
 
     if (usersLoading) return <LoadingSpinner />
 
