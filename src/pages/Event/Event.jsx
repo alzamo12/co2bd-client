@@ -37,7 +37,7 @@ const Event = () => {
             return data
         },
         onSuccess: (data) => {
-            // console.log(data)
+            queryClient.invalidateQueries(['isJoined'])
             if (data.acknowledged) {
                 toast.success("You have Successfully Joined the Event")
             }
@@ -149,6 +149,15 @@ const Event = () => {
         }
     });
 
+    // check if the event is joined or not
+    const { data: isJoined = false } = useQuery({
+        queryKey: ['isJoined', user?.email, eventId],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/is-event-joined?email=${user?.email}&eventId=${eventId}`)
+            return res.data.joined
+        }
+    })
+
 
     const handleJoinEvent = async event => {
         const { _id, ...rest } = event;
@@ -219,7 +228,12 @@ const Event = () => {
                                         </div>
 
                             }
-                            <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
+                            {
+                                isJoined ? 
+                                <button disabled={true}  className="btn btn-neutral">Joined</button>
+                                :
+                                <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
+                            }
                         </div>
                     </div>
                 </div>
