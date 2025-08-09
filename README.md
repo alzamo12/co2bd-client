@@ -7,6 +7,9 @@
 
 This application is an event management website. It helps user to to find, join and create his own websites handily. This helps user to developed the social
 
+![Alt text describing the image](https://i.ibb.co.com/JwDvVnKM/Screenshot-150.png)
+
+
 ## Features
 
 * User registration and login (Firebase Auth)
