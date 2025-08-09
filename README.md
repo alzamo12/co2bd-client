@@ -76,4 +76,4 @@ Project Link: https://co2bd-d6f4f.web.app/
 1️⃣ **Clone the Repository**
 ```bash
 git clone https://github.com/alzamo12/co2bd-client
-cd richter-restaurant-backend
+cd co2bd-client
