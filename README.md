@@ -70,3 +70,10 @@ VITE_appId=your_app_id
 Project Name : CO2BD
 
 Project Link: https://co2bd-d6f4f.web.app/
+
+## 📦 Installation & Setup
+
+1️⃣ **Clone the Repository**
+```bash
+git clone https://github.com/alzamo12/co2bd-client
+cd richter-restaurant-backend
