@@ -53,27 +53,49 @@ This application is an event management website. It helps user to to find, join 
 ```
 
 
-## Configuration
-
-Create a `.env` file in the root and add the following:
-
-```env
-VITE_apiKey=your_api_key
-VITE_authDomain=your_project.firebaseapp.com
-VITE_projectId=your_project_id
-VITE_storageBucket=your_project.appspot.com
-VITE_messagingSenderId=your_sender_id
-VITE_appId=your_app_id
-```
-
-
 Project Name : CO2BD
 
 Project Link: https://co2bd-d6f4f.web.app/
 
 ## 📦 Installation & Setup
 
-1️⃣ **Clone the Repository**
+## 🖥 Run Locally — Step-by-Step
+
+### **Prerequisites**
+Make sure you have installed:
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- Any required services for the project (e.g., MongoDB, MySQL, Firebase, etc.)
+
+---
+### **1. Clone the repository**
 ```bash
 git clone https://github.com/alzamo12/co2bd-client
 cd co2bd-client
+
+```
+## 🌱 Environment Variables
+Create a `.env` file in your project root:
+```env
+VITE_apiKey= firebase apikey
+VITE_authDomain= firebase auth domain
+VITE_projectId= firebase projectId
+VITE_storageBucket= firebase storageBucket
+VITE_messagingSenderId= firebase messaging sender id
+VITE_appId= firebase app id
+VITE_STRIPE_PUBLISHABLE_KEY== strip e publishable key
+
+```
+## Installation
+```
+npm install 
+or 
+nmp i
+
+```
+## run locally
+```
+npm run dev
+# or
+yarn dev
+
