@@ -15,9 +15,9 @@ const Main = () => {
         <div className=''>
             <title>CO_2_BD</title>
             <ToastContainer />
-            <div className="space-y-20 ">
+            <div className="space-y-10 ">
                     <Navbar/>
-                <div className="px-2 md:w-11/12 mx-auto pt-32 min-h-screen">
+                <div className="px-2 md:w-11/12 mx-auto pt-16 min-h-screen">
                     <Outlet />
                 </div>
                 <Footer />

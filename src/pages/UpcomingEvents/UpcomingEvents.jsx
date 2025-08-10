@@ -58,8 +58,8 @@ const UpcomingEvents = () => {
     }
 
     return (
-        <div className="mx-3 md:mx-auto lg:mt-16 space-y-8 md:space-y-10 ">
-            <h2 className="card-title text-2xl md:text-5xl justify-center">Upcoming Events Page</h2>
+        <div className="mx-3 md:mx-auto space-y-8 md:space-y-16 lg:my-16">
+            <h2 className="card-title mt-0 text-2xl md:text-3xl justify-center">Upcoming Events Page</h2>
             <div className="flex flex-col md:flex-row gap-3 md:gap-12">
                 {/* search form */}
                 <form className="flex w-full md:w-1/2 " onSubmit={handleSearch} action="">
@@ -86,12 +86,23 @@ const UpcomingEvents = () => {
                     upcomingEvents?.map(event => <UpcomingEvent key={event._id} event={event} />)
                 }
             </div>
-            <Pagination
+            {/* <Pagination
                 totalPages={totalPages}
                 onPageChange={handlePage}
                 siblingCount={1}
                 boundaryCount={1}
-            />
+            /> */}
+            <div className="join grid grid-cols-3 w-xl">
+                <button
+                    onClick={() => handlePage(page - 1)}
+                    disabled={page <= 1}
+                    className="join-item btn btn-primary text-white">Previous page</button>
+                <span className="text-center my-auto">Page {page} of {totalPages}</span>
+                <button
+                    onClick={() => handlePage(page + 1)}
+                    disabled={page >= totalPages}
+                    className="join-item btn btn-primary text-white">Next</button>
+            </div>
         </div >
     );
 };

@@ -2,9 +2,9 @@ import logo from "../../../assets/healthy.png"
 
 const Footer = () => {
     return (
-        <footer  >
-            <div className={`bg-green-900  text-gray-100 footer mt-8   flex  `}>
-                <aside className="w-full h-full md:flex-1 py-4 md:py-20 px-6 lg:px-32 md:justify-end inter font-medium">
+        <footer  className="bg-accent">
+            <div className={`  text-gray-100 footer mt-8 flex justify-between w-11/12 mx-auto`}>
+                <aside className="w-full h-full md:flex-1 py-4 md:py-20   inter font-medium">
                     <h2 className="md:text-3xl  uppercase md:mb-4">Contact us</h2>
                     <div className="text-[8px] md:text-lg md:text-left md:space-y-2">
                         <p> 22/22, Khilji Road, Mohammadpur, </p>
@@ -14,7 +14,7 @@ const Footer = () => {
                     </div>
                 </aside>
                 {/* <div className="divider before:bg-white after:bg-white"></div> */}
-                <nav className={`w-full h-full flex-1 py-4 md:py-32 px-10 lg:px-36 font-medium inter`} >
+                <nav className={`w-full h-full flex-1 py-4 md:py-32 justify-end font-medium inter`} >
                     <h2 className="text-xl md:text-2xl">Follow Us</h2>
                     <h6 className="footer-title text-[10px] md:text-lg ">Join us on social media</h6>
                     <div className="grid grid-flow-col gap-4">
@@ -55,7 +55,7 @@ const Footer = () => {
                 </nav>
             </div>
             <div className=" footer-center relative w-[100vw] left-1/2 right-1/2 -mx-[50vw] bg-base-300 text-base-content text-xs md:text-base p-4">
-                <p><span className='font-bold'>Terms & Conditions</span>: By creating an account, booking an Event, or otherwise using our Services, you confirm that you have read, understood, and agree to these Terms & Conditions and our Privacy Policy.</p>
+                <p className="w-11/12 mx-auto"><span className='font-bold'>Terms & Conditions</span>: By creating an account, booking an Event, or otherwise using our Services, you confirm that you have read, understood, and agree to these Terms & Conditions and our Privacy Policy.</p>
             </div>
         </footer>
     );

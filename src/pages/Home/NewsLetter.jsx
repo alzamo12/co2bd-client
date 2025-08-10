@@ -2,7 +2,7 @@ import React from 'react';
 
 const NewsLetter = () => {
     return (
-        <div className='mt-10 lg:mt-14 px-2 md:px-0'>
+        <div className=' px-2 md:px-0'>
             <div className="divider before:bg-green-300 after:bg-green-300"></div>
             <div className='md:w-2xl mx-auto px-2 mdLpx-0'>
                 <div className="card-body items-center text-center edu-font">

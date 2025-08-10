@@ -20,7 +20,7 @@ import Marquee from 'react-fast-marquee';
 
 const Gallery = () => {
     return (
-        <div className='relative mt-12 lg:mt-20'>
+        <div className='relative '>
             <h2 className="text-2xl lg:text-4xl font-bold text-center md:mb-4">Our Successful Works Till Now!! </h2>
             <Marquee
             gradientWidth={3000} 

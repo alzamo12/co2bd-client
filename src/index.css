@@ -9,6 +9,7 @@
   default: true; /* set as default */
   
   --color-primary: #22c55e;
+  --color-accent: #166534;
   --color-secondary: #f0fdf4
 
 }

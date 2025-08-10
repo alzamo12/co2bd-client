@@ -14,7 +14,8 @@ import Stats from "../pages/AdminDashboard/Stats/Stats";
 import AdminDashboard from "../layouts/AdminDashboard";
 import Users from "../pages/AdminDashboard/Users/Users";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-
+import AboutUs from "../pages/Aboutus/AboutUs";
+import FAQSection from "../pages/FAQ/FAQ";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,7 +51,14 @@ const router = createBrowserRouter([
         // loader: async({params}) => fetch(`https://co2bd-server.vercel.app/event/${params.id}`)
         // loader: async ({ params }) => fetch(`http://localhost:5000/event/${params.id}`)
       },
-
+      {
+        path: "/about-us",
+        Component: AboutUs
+      },
+      {
+        path: "/faq",
+        Component: FAQSection
+      }
     ]
   },
   {

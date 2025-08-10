@@ -84,7 +84,7 @@ const sdgCards = [
 
 const Featured = () => {
     return (
-        <div className="mt-10 md:mt-20 space-y-5">
+        <div className=" space-y-5">
             <h2 className="text-2xl lg:text-4xl font-medium text-center lg:leading-12">Our Featuring Commitment <br />
                 <span className="text-emerald-700">to Sustainable Development</span>
             </h2>
