@@ -14,6 +14,16 @@
 
 }
 
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: false; /* set as default */
+  
+  --color-primary: #4ade80;
+  --color-accent: #052e16;
+  --color-secondary: #bbf7d0
+
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap');

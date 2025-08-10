@@ -74,7 +74,7 @@ const UpdateEvent = () => {
     };
 
     return (
-        <div className="mt-10 w-3/4 md:w-full mx-auto">
+        <div className="my-16 w-3/4 md:w-full mx-auto">
             <div className="md:mx-auto md:w-xl border-l-0 border-r-0 border-2 border-green-400  border-dashed py-4">
                 <h2 className="card-title justify-center text-2xl md:text-4xl">Update Your Event</h2>
             </div>
