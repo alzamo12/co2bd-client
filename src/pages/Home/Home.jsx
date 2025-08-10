@@ -1,3 +1,4 @@
+import RecentEvents from '../../components/Home/RecentEvents/RecentEvetns';
 import Banner from './Banner';
 import Featured from "./Featured"
 import Gallery from './Gallery';

@@ -21,15 +21,7 @@ const ManageEvent = ({ event }) => {
                     <Link to={`/update-event/${_id}`} className='btn bg-green-500 text-white'>Update Event</Link>
                 </div>
             </div>
-            {/* <div className="card-body px-0 w-full">
-                <h2 className="card-title text-xl">{title}</h2>
-                <h2 className="card-title text-base">{type}</h2>
-                <p>{location}</p>
-                <p>{eventDate}</p>
-                <div className="card-actions flex w-full justify-end">
-                    <Link to={`/update-event/${_id}`} className='btn bg-green-500 text-white'>Update Event</Link>
-                </div>
-            </div> */}
+        
         </div>
     );
 };
