@@ -51,8 +51,8 @@ const sdgCards = [
     },
     {
         id: 7,
-        title: "Decent Work and Economic Growth",
-        description: "Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all",
+        title: " Economic Growth",
+        description: "Promote sustained, inclusive and sustainable economic growth.",
         img: img7,
     },
     {
@@ -88,7 +88,7 @@ const Featured = () => {
             <h2 className="text-2xl lg:text-4xl font-medium text-center lg:leading-12">Our Featuring Commitment <br />
                 <span className="text-emerald-700">to Sustainable Development</span>
             </h2>
-            <div className="container lg:max-w-screen-xl px-3 md:mx-auto md:mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="w-full px-3 lg:px-0 mx-auto  md:mx-auto md:mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-12">
                 {sdgCards.map(sdgCard => <FeatureCard key={sdgCard?.id} sdgCard={sdgCard} />)}
             </div>
         </div>

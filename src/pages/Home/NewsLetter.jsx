@@ -12,7 +12,7 @@ const NewsLetter = () => {
                 <fieldset className="fieldset mx-auto ">
                     <legend className="fieldset-legend text-base">Business Email*</legend>
                     <input type="text" className="input w-full" placeholder="Business email" />
-                    <button className='btn bg-green-600 text-white font-bold w-32 mx-auto'>Submit</button>
+                    <button className='btn btn-primary text-white font-bold w-32 mx-auto'>Submit</button>
                 </fieldset>
             </div>
             <div className="divider before:bg-green-300 after:bg-green-300"></div>

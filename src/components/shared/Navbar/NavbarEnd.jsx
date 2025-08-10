@@ -28,7 +28,7 @@ const NavbarEnd = ({ notificationLoading, navLinks, user, handleLogOut, handleTo
     return (
         <div className="navbar-end  w-auto gap-2 md:gap-4">
             {/* logout button */}
-            <button onClick={handleLogOut} className="btn bg-green-500 md:w-auto px-2 md:px-4 text-xs md:text-sm  text-white">Logout</button>
+            <button onClick={handleLogOut} className="btn btn-primary md:w-auto px-2 md:px-4 text-xs md:text-sm  text-white">Logout</button>
             {/* pfp  */}
             <div className="dropdown group dropdown-end">
                 {/* pfp avatar */}

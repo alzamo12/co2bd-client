@@ -4,6 +4,14 @@
   themes: light --default, dark --prefersdark;
 }
 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true; /* set as default */
+  
+  --color-primary: #22c55e
+
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap');

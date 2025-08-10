@@ -20,7 +20,7 @@ const UpcomingEvent = ({ event }) => {
                 <p className="flex gap-2 text-base items-center"><FaMapMarkerAlt />{location}</p>
                 <p className="flex gap-2 text-base items-center"><FaCalendarAlt />{eventDate}</p>
                 <div className="card-actions flex w-full justify-end">
-                    <Link to={`/event/${_id}`} className='btn bg-green-500 hover:bg-green-600 text-white'>View Event</Link>
+                    <Link to={`/event/${_id}`} className='btn btn-primary hover:brightness-95 text-white'>View Event</Link>
                 </div>
             </div>
         </div>

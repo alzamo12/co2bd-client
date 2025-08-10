@@ -13,6 +13,7 @@ import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
 import Stats from "../pages/AdminDashboard/Stats/Stats";
 import AdminDashboard from "../layouts/AdminDashboard";
 import Users from "../pages/AdminDashboard/Users/Users";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin-dashboard",
-    element: <AdminDashboard/>,
+    element: <AdminDashboard />,
     children: [
       {
         path: "admin-stats",
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
         Component: Users
       }
     ]
+  },
+  {
+    path: "*",
+    element: <ErrorPage />
   }
 ]);
 

@@ -135,7 +135,7 @@ const Register = () => {
                                         type="password"
                                         className=" input  focus:bg-transparent font-bold  w-full"
                                         placeholder="Password" />
-                                    <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 bg-green-500 border-none hover:bg-green-600" />
+                                    <input type='submit' value='Sign Up' className="btn w-1/3 text-white mt-4 btn-primary border-none" />
                                 </form>
                                 {/* go to login page */}
                                 <Link to="/login" className="link link-hover text-green-500">Go to Login Page</Link>

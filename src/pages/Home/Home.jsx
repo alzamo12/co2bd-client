@@ -4,8 +4,8 @@ import Gallery from './Gallery';
 import NewsLetter from "./NewsLetter"
 const Home = () => {
     return (
-        <div>
-            <div className="mx-2 md:mx-auto">
+        <div className='w-full'>
+            <div className=" md:mx-0 w-full">
                 <Banner />
             </div>
             <div>

@@ -39,7 +39,17 @@ const Event = () => {
         onSuccess: (data) => {
             queryClient.invalidateQueries(['isJoined'])
             if (data.acknowledged) {
-                toast.success("You have Successfully Joined the Event")
+                toast.success("You have Successfully Joined the Event");
+                const notificationData = {
+                    receiverId: event?.email,
+                    senderId: user?.email,
+                    type: "event-joined",
+                    typeId: eventId,
+                    postId: data?.insertedId,
+                    message: `${user?.displayName} Joined Your Event`
+                };
+
+                notificationAsync(notificationData)
             }
         },
         onError: (error) => {
@@ -56,18 +66,6 @@ const Event = () => {
             return res.data
         }
     })
-
-    // notification post api when a user like an event or comment
-    // const { mutateAsync: notificationAsync } = useMutation({
-    //     mutationFn: async (data) => {
-    //         const res = await axiosPublic.post("/notification", data);
-    //         return res.data
-    //     },
-    //     onSuccess: async (data) => {
-    //         console.log('notification post api', data);
-    //         queryClient.invalidateQueries("notification", "notificationCount")
-    //     }
-    // })
 
     // like post api => update database when a user like a post
     const { mutateAsync: likeAsync, isPending: likePending } = useMutation({
@@ -229,10 +227,10 @@ const Event = () => {
 
                             }
                             {
-                                isJoined ? 
-                                <button disabled={true}  className="btn btn-neutral">Joined</button>
-                                :
-                                <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
+                                isJoined ?
+                                    <button disabled={true} className="btn btn-neutral">Joined</button>
+                                    :
+                                    <button onClick={() => handleJoinEvent(event)} className="btn btn-neutral">Join Event</button>
                             }
                         </div>
                     </div>

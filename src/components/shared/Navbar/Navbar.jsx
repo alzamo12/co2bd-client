@@ -56,15 +56,20 @@ const Navbar = () => {
 
     const navLinks = <>
         {
-            userRole?.role === 'admin' ?
-                <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>
-                :
-                <li><Link to="/user-dashboard">User Dashboard</Link></li>
+            userRole?.role === 'admin' &&
+            <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>
+            // :
+            // <li><Link to="/user-dashboard">User Dashboard</Link></li>
         }
         <li><Link to="create-event">Create Events</Link></li>
         <li><Link to="manage-events">Manage Events</Link></li>
         <li><Link to="joined-events">Joined Events</Link></li>
     </>;
+
+    const publicNavLinks = <>
+        <li><Link to="/upcoming-events" className=''>Upcoming Events</Link></li>
+        <li><Link to="/about-us" className=''>About Us</Link></li>
+        <li><Link to="/faq" className=''>FAQ</Link></li></>
 
     const handleLogOut = () => {
         logOut()
@@ -79,10 +84,15 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar md:w-11/12 mx-auto shadow-sm justify-between dark:border-white dark:border-b-2 ">
-            <NavbarStart />
-            <div className="text-xs font-bold cursor-pointer lg:flex">
-                <Link to="/upcoming-events" className='md:card-title'>Upcoming Events</Link>
+        <div className="navbar shadow-sm justify-between
+         dark:border-white dark:border-b-2  
+         fixed bg-white z-50 md:px-[4.16666666667%] top-0
+         ">
+            <NavbarStart navLinks={publicNavLinks} />
+            <div className="text-sm cursor-pointer lg:flex hidden md:block">
+                <ul className='flex gap-4'>
+                    {publicNavLinks}
+                </ul>
             </div>
             <div>
                 {
