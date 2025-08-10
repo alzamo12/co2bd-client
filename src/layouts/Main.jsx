@@ -17,7 +17,7 @@ const Main = () => {
             <ToastContainer />
             <div className="space-y-20 ">
                     <Navbar/>
-                <div className="px-2 md:w-11/12 mx-auto mt-32 min-h-screen">
+                <div className="px-2 md:w-11/12 mx-auto pt-32 min-h-screen">
                     <Outlet />
                 </div>
                 <Footer />

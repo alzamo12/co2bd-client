@@ -8,7 +8,8 @@
   name: "light";
   default: true; /* set as default */
   
-  --color-primary: #22c55e
+  --color-primary: #22c55e;
+  --color-secondary: #f0fdf4
 
 }
 

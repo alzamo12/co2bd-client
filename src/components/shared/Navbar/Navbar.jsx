@@ -85,8 +85,8 @@ const Navbar = () => {
 
     return (
         <div className="navbar shadow-sm justify-between
-         dark:border-white dark:border-b-2  
-         fixed bg-white z-50 md:px-[4.16666666667%] top-0
+         dark:border-white dark:border-b-2  bg-secondary
+         fixed  z-50 md:px-[4.16666666667%] top-0
          ">
             <NavbarStart navLinks={publicNavLinks} />
             <div className="text-sm cursor-pointer lg:flex hidden md:block">
