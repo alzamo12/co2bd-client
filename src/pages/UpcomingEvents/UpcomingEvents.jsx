@@ -58,7 +58,7 @@ const UpcomingEvents = () => {
     }
 
     return (
-        <div className="mx-3 md:mx-auto space-y-8 md:space-y-16 lg:my-16">
+        <div className="mx-3 md:mx-auto space-y-8 md:space-y-16 my-16">
             <h2 className="card-title mt-0 text-2xl md:text-3xl justify-center">Upcoming Events Page</h2>
             <div className="flex flex-col md:flex-row gap-3 md:gap-12">
                 {/* search form */}

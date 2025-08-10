@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const AboutUs = () => {
     return (
 
-        <div className="bg-secondary text-green-900 min-h-screen flex flex-col items-center px-6 py-12 my-16">
+        <div className="bg-secondary text-green-900 min-h-screen flex flex-col items-center px-6 py-12 my-16 dark:bg-accent dark:text-white">
             {/* Heading */}
             <h1 className="text-4xl font-bold text-green-800 mb-6">About Us</h1>
 
@@ -25,7 +26,7 @@ const AboutUs = () => {
                     <h2 className="text-xl font-bold mb-3 text-green-700">
                         🌿 Empower Communities
                     </h2>
-                    <p>
+                    <p className='text-black'>
                         Providing tools and resources to help communities take meaningful
                         action for social and environmental betterment.
                     </p>
@@ -35,7 +36,7 @@ const AboutUs = () => {
                     <h2 className="text-xl font-bold mb-3 text-green-700">
                         🌏 Raise Awareness
                     </h2>
-                    <p>
+                    <p className='text-black'>
                         Sharing knowledge about climate change, sustainability, and social
                         welfare to inspire informed action.
                     </p>
@@ -45,7 +46,7 @@ const AboutUs = () => {
                     <h2 className="text-xl font-bold mb-3 text-accent">
                         🤝 Connect People
                     </h2>
-                    <p>
+                    <p className='text-black'>
                         Bringing like-minded individuals and organizations together for
                         greater impact and long-term change.
                     </p>
@@ -66,9 +67,9 @@ const AboutUs = () => {
 
             {/* Call to Action */}
             <div className="mt-12">
-                <button className=" btn btn-primary text-white px-6 py-3 rounded-lg font-semibold shadow-md transition">
+                <Link to="/upcoming-events" className=" btn btn-primary text-white px-6 py-3 rounded-lg font-semibold shadow-md transition">
                     Join the Movement
-                </button>
+                </Link>
             </div>
         </div>
 

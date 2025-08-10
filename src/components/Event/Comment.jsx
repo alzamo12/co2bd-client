@@ -82,7 +82,7 @@ const Comment = ({ c, eventTitle, eventId }) => {
     };
 
     return (
-        <div key={c?._id} className="p-4 bg-gray-100 rounded-lg">
+        <div key={c?._id} className="p-4 bg-gray-100 rounded-lg dark:bg-black">
             <div className="flex items-center space-x-2 mb-2">
                 <img src={c?.userPhoto} alt="" className="w-8 h-8 rounded-full" />
                 <span className="font-medium">{c?.userName}</span>
